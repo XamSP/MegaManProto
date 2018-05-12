@@ -1,4 +1,19 @@
+var currentGame;
+var currentMegaMan;
+var currentTargetIcon;
+
+var theCanvas = document.getElementById("theCanvas");
+var ctx = theCanvas.getContext("2d");
+
+var twoCanvas = document.getElementById('twoCanvas');
+var ctx2 = twoCanvas.getContext("2d");
+
 // GAME SETUP & CONTROLS
+/*var Game = function(){
+  this.car = {}; // car => OBJECT 
+  this.enemies = []; // obstacles => ARRAY
+}*/
+
 function startGame(){
   getArmy();
   autoTarget();
@@ -9,21 +24,64 @@ function startRound(){
   currentHP();
 }
 
+function draw(round) {
+  placeArmy(round);
+  round.map(x => x.drawEnemy());
+  // currentMegaMan = new Megaman();  
+  currentMegaMan = new Megaman().drawMegaMan();
+  currentMegaMan = new Megaman(); 
+  //autoTarget(round);
+  autoTarget(round);
+  currentTargetIcon = new TargetIcon(round).drawTargetIcon();
+  // placeTargetIcon(round);
+  updateHp();
+}
+
+function updateHp() {
+  $("#hp-bar").text(currentMegaMan.hp);
+}
+
 function cardActivate(){}
 
-function getArmy(enemy){ //need improvement
+function placeArmy(round) {
+  if(round.length === 3) {
+    round[0].x = 740;
+    round[0].y = 280;
+    
+    round[1].x = 680;
+    round[1].y = 320;
+    
+    round[2].x = 740;
+    round[2].y = 340;
+  } else if (round.length === 2) {
+    round[0].x = 720;
+    round[0].y = 280;
+    
+    round[1].x = 720;
+    round[1].y = 340;
+
+  } else if (round.length === 1) {
+    round[0].x = 720;
+    round[0].y = 320;
+  }
+}
+
+/*function getArmy(round){ //need improvement
   //get all enemies in the battlefield in the same round
   var army = [enemy];
   return army;
-}
+}*/
 
-function autoTarget(enemy){
-  var army = getArmy(enemy);
+function autoTarget(round){
+  var army = round;
   return army[0].targeted = true;
 }
 
-function targetDown(){
-  var army = getArmy();
+
+//place targetIcon function
+
+function targetDown(round){
+  var army = round;
   //for loop to change the target 
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
@@ -39,8 +97,8 @@ function targetDown(){
   }
 }
 
-function targetUp(){ //
-  var army = getArmy();
+function targetUp(round){ //
+  var army = round;
   //for loop to change the target 
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
@@ -55,6 +113,7 @@ function targetUp(){ //
    }
   }
 }
+
 
 function action(key) {
   //switch //the "WASD and space button"
@@ -92,10 +151,29 @@ function action(key) {
   }
 }
 
+function dmgReceived(enemy) {
+  currentMegaMan.hp -= enemy.dmg_output;
+  updateHp();
+}
 
-function currentHP() {}
+function dmgDished(round){
+  for (i=0; i < round.length; i++) {
+    if (round[i].targeted === true) {
+      //random dmg since I haven't implemented the buster
+      return round[i].hp -= 10;
 
-function dmgReceived() {}
+    } else {
+      continue;
+    }
+  }
+}
+
+function enemyHpDisplay(enemy){
+  ctx2.clearRect(enemy.x, enemy.y, enemy.width, enemy.height);
+  ctx2.font = "30px Arial";
+  var xy = ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height);
+return xy;
+}
 
 // CHARACTERS & ENEMIES
 
@@ -105,10 +183,23 @@ var Megaman = function(){
   this.gauge = 100;//% //later
   this.guard_cooldown = 100;//% //later
   this.team = "player";
-  this.img = 'images/megaman.png'; //change later :P
+  this.x = 140;
+  this.y = 320;
+  this.width = 80;
+  this.height = 60;
+  this.img = "/home/max/test/Max's Game/images/megaman/megaBuster/megaBuster(loop).gif"; //change later :P
 };
 
-function Enemy(name, hp, dmg_output, guard, attack_interval) {
+Megaman.prototype.drawMegaMan = function() {
+  var megaManImage = new Image();
+  megaManImage.src = this.img;
+  var that = this;
+  megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y, that.width, that.height);
+  
+
+};
+
+var Enemy = function (name, hp, dmg_output, guard, attack_interval,img) {
   this.name = name;
   this.hp = hp;
   this.dmg_output = dmg_output;
@@ -116,10 +207,80 @@ function Enemy(name, hp, dmg_output, guard, attack_interval) {
   this.team = 'opponent';
   this.attack_interval = attack_interval;
   this.targeted = false;
+  this.x = 0;
+  this.y = 0;
+  this.width = 60;
+  this.height = 60;
+  this.img = img;
 
 }
 
-var mettaur = new Enemy("Mettaur",40,20,false,20);
+Enemy.prototype.drawEnemy = function(){
+  var enemyImage = new Image();
+  enemyImage.src = this.img;
+  var that = this;
+  enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
+  //check the placeArmy() to place on the battlefield;
+
+};
+
+var mettaur = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
+
+var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
+
+var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
+
+var round1 = [mettaur, mettaur2,mettaur3];
+
+var TargetIcon = function(round) {
+  this.x = round[0].x;
+  this.y = round[0].y;
+  this.width = 60;
+  this.height = 60;
+  this.img = "images/battlefield-misc/targetIcon.png";
+};
+
+TargetIcon.prototype.drawTargetIcon = function() {
+  var targetImage = new Image();
+  targetImage.src = this.img;
+  var that = this;
+  targetImage.onload = ()=>ctx.drawImage(targetImage, that.x, that.y, that.width, that.height);
+
+};
+
+TargetIcon.prototype.move = function() {
+  ctx.clearRect(this.x, this.y, this.width, this.height);
+  switch(number){
+  case 38: //the key ' ^ '
+  targetUp();
+      
+    break;
+  case 40: //the key ' \/ '
+  targetDown();
+
+    break;
+  default:
+  console.log("lol");  
+  }
+  this.drawTargetIcon();
+};
+
+/*function placeTargetIcon(round) {
+  var army = round;
+  
+  for (i=0; i < round.length; i++) {
+    if (round[i].targeted === true) {
+      currentTargetIcon.x = round[i].x;
+      currentTargetIcon.y = round[i].y;
+
+  } else {
+    continue;
+  }
+  
+ }
+}*/
+
+
 
 // CARD MECHANICS
 function Card(dmg, name, rank, effect) {
