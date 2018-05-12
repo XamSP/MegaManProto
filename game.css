@@ -1,7 +1,6 @@
 /* Setup */
-#game-board {
-  float: left;
-  padding: 20px 0px;
+.game-board {
+  padding: 0px 0px;
   background-image: url('images/background/Internet.gif');
   background-size: contain;
 }
@@ -20,6 +19,12 @@
   z-index: 1;
 }
 
+#threeCanvas{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
 
 #hp-bar {
   /*margin-left: 100px; 

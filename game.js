@@ -5,8 +5,11 @@ var currentTargetIcon;
 var theCanvas = document.getElementById("theCanvas");
 var ctx = theCanvas.getContext("2d");
 
-var twoCanvas = document.getElementById('twoCanvas');
+var twoCanvas = document.getElementById("twoCanvas");
 var ctx2 = twoCanvas.getContext("2d");
+
+var threeCanvas = document.getElementById("threeCanvas");
+var ctx3= threeCanvas.getContext("2d")
 
 // GAME SETUP & CONTROLS
 /*var Game = function(){
@@ -38,7 +41,16 @@ function draw(round) {
 }
 
 function updateHp() {
-  $("#hp-bar").text(currentMegaMan.hp);
+ // $("#hp-bar").text(currentMegaMan.hp); just gonna canvas
+ if(currentMegaMan.hp >= 1) {
+  ctx2.clearRect(0 ,0 ,80, 80);
+  ctx2.font = "30px Arial";
+  ctx2.fillStyle = 'white';
+  ctx2.fillText(currentMegaMan.hp, 30, 30);
+} else if (currentMegaMan.hp < 10) {
+  ctx2.clearRect(0,0,80,80);
+}
+
 }
 
 function cardActivate(){}
@@ -86,14 +98,16 @@ function targetDown(round){
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
       //nothing lol
-    }  else if (army[army.length - 1].targeted === true) {
+    } else if (army[army.length - 1].targeted === true) {
       army[army.length - 1].targeted = false;
-      return army[0].targeted = true;
+      army[0].targeted = true;
+      break;
     
     } else if (army[i].targeted === true) {
-    army[i].targeted = false;
-    return army[i+1] = true;
-   }
+      army[i].targeted = false;
+      army[i+1].targeted = true;
+      break;
+  }
   }
 }
 
@@ -105,11 +119,13 @@ function targetUp(round){ //
       //nothing lol
     } else if (army[0].targeted === true) {
       army[0].targeted = false;
-      return army[army.length -1].targeted = true;
+      army[army.length -1].targeted = true;
+      break;
     
     } else if (army[i].targeted === true) {
     army[i].targeted = false;
-    return army[i-1] = true;
+    army[i-1].targeted = true;
+    break;
    }
   }
 }
@@ -160,7 +176,8 @@ function dmgDished(round){
   for (i=0; i < round.length; i++) {
     if (round[i].targeted === true) {
       //random dmg since I haven't implemented the buster
-      return round[i].hp -= 10;
+      round[i].hp -= 10;
+      enemyHpDisplay(round[i]);
 
     } else {
       continue;
@@ -169,12 +186,15 @@ function dmgDished(round){
 }
 
 function enemyHpDisplay(enemy){
-  ctx2.clearRect(enemy.x, enemy.y, enemy.width, enemy.height);
-  ctx2.font = "30px Arial";
-  var xy = ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height);
-return xy;
+  if(enemy.hp >= 1) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height);
+  } else if (enemy.hp < 10) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+  }
 }
-
 // CHARACTERS & ENEMIES
 
 var Megaman = function(){
@@ -230,13 +250,13 @@ var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/ima
 
 var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
 
-var round1 = [mettaur, mettaur2,mettaur3];
+var round1 = [mettaur, mettaur2, mettaur3];
 
 var TargetIcon = function(round) {
   this.x = round[0].x;
   this.y = round[0].y;
-  this.width = 60;
-  this.height = 60;
+  this.width = round[0].width;
+  this.height = round[0].height;
   this.img = "images/battlefield-misc/targetIcon.png";
 };
 
@@ -244,12 +264,12 @@ TargetIcon.prototype.drawTargetIcon = function() {
   var targetImage = new Image();
   targetImage.src = this.img;
   var that = this;
-  targetImage.onload = ()=>ctx.drawImage(targetImage, that.x, that.y, that.width, that.height);
+  targetImage.onload = ()=>ctx3.drawImage(targetImage, that.x, that.y, that.width, that.height);
 
 };
 
 TargetIcon.prototype.move = function() {
-  ctx.clearRect(this.x, this.y, this.width, this.height);
+  ctx3.clearRect(this.x, this.y, this.width, this.height);
   switch(number){
   case 38: //the key ' ^ '
   targetUp();
