@@ -1,7 +1,9 @@
-var currentGame;
+var currentRound = round1;
 var currentMegaMan;
 var currentTargetIcon;
 
+
+//Canvas Layers
 var theCanvas = document.getElementById("theCanvas");
 var ctx = theCanvas.getContext("2d");
 
@@ -12,13 +14,9 @@ var threeCanvas = document.getElementById("threeCanvas");
 var ctx3= threeCanvas.getContext("2d")
 
 // GAME SETUP & CONTROLS
-/*var Game = function(){
-  this.car = {}; // car => OBJECT 
-  this.enemies = []; // obstacles => ARRAY
-}*/
 
+//Start-up
 function startGame(){
-  getArmy();
   autoTarget();
 }
 
@@ -36,24 +34,61 @@ function draw(round) {
   //autoTarget(round);
   autoTarget(round);
   currentTargetIcon = new TargetIcon(round).drawTargetIcon();
+  currentTargetIcon = new TargetIcon(round);
   // placeTargetIcon(round);
   updateHp();
 }
 
+//Hp, Gauges, and dmgs. 
+
 function updateHp() {
  // $("#hp-bar").text(currentMegaMan.hp); just gonna canvas
- if(currentMegaMan.hp >= 1) {
+  if(currentMegaMan.hp >= 1) {
   ctx2.clearRect(0 ,0 ,80, 80);
   ctx2.font = "30px Arial";
   ctx2.fillStyle = 'white';
   ctx2.fillText(currentMegaMan.hp, 30, 30);
-} else if (currentMegaMan.hp < 10) {
+  } else if (currentMegaMan.hp < 10) {
   ctx2.clearRect(0,0,80,80);
+  }
 }
 
+function dmgReceived(enemy) {
+  if(currentMegaMan.guard === true){
+    
+  } else if (currentMegaMan.guard === false){
+    console.log(enemy);
+    currentMegaMan.hp -= enemy.dmg_output;
+    updateHp();
+  }
+  console.log('worked?');
 }
 
-function cardActivate(){}
+function dmgDished(round){
+  for (i=0; i < round.length; i++) {
+    if (round[i].targeted === true) {
+      //random dmg since I haven't implemented the buster
+      round[i].hp -= 1;
+      enemyHpDisplay(round[i]);
+
+    } else {
+      continue;
+    }
+  }
+}
+
+function enemyHpDisplay(enemy){
+  if(enemy.hp >= 1) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height);
+  } else if (enemy.hp < 1) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+  }
+}
+
+//Targeting and Placement
 
 function placeArmy(round) {
   if(round.length === 3) {
@@ -78,19 +113,12 @@ function placeArmy(round) {
   }
 }
 
-/*function getArmy(round){ //need improvement
-  //get all enemies in the battlefield in the same round
-  var army = [enemy];
-  return army;
-}*/
-
 function autoTarget(round){
   var army = round;
   return army[0].targeted = true;
 }
 
-
-//place targetIcon function
+    //place targetIcon function
 
 function targetDown(round){
   var army = round;
@@ -130,127 +158,26 @@ function targetUp(round){ //
   }
 }
 
-
-function action(key) {
-  //switch //the "WASD and space button"
-  switch(key) {
-    case 87: //the key 'W'
-    if(firstCard.cooldown /*>= 30%*/) {
-      firstCard.cardActivate();
-    }
-      break;
-    case 65: //the key 'A'
-    if(secondCard.cooldown /*>= 30%*/){
-      secondCard.cardActivate();
-    }
-      break;
-    case 83: //the key 'S'
-    if(thirdCard.cooldown /*>=30%*/){
-       thirdCard.cardActivate();
-     } 
-      break;
-    case 68: //the key 'D'
-    if(fourthCard.cooldown /*>=30%*/){
-      fourthCard.cardActivate();
-    }
-      break;
-    case 38: //the key ' ^ '
-    targetUp();
-        
-      break;
-    case 40: //the key ' \/ '
-    targetDown();
-
-      break;
-    default:
-    console.log("lol");  
+function targetforDrawing(round){ 
+  var army = round;
+  //for loop to change the target 
+  for(var i=0; i < army.length; i++) {
+    if (army.length === 1){
+      //nothing lol
+    } else if (army[i].targeted === true) {
+      return army[i];
+    } 
   }
 }
 
-function dmgReceived(enemy) {
-  currentMegaMan.hp -= enemy.dmg_output;
-  updateHp();
-}
-
-function dmgDished(round){
-  for (i=0; i < round.length; i++) {
-    if (round[i].targeted === true) {
-      //random dmg since I haven't implemented the buster
-      round[i].hp -= 10;
-      enemyHpDisplay(round[i]);
-
-    } else {
-      continue;
-    }
-  }
-}
-
-function enemyHpDisplay(enemy){
-  if(enemy.hp >= 1) {
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
-    ctx2.fillStyle = 'white';
-    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height);
-  } else if (enemy.hp < 10) {
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-  }
-}
-// CHARACTERS & ENEMIES
-
-var Megaman = function(){
-  this.name = 'MegaMan.EXE';
-  this.hp = 100;
-  this.gauge = 100;//% //later
-  this.guard_cooldown = 100;//% //later
-  this.team = "player";
-  this.x = 140;
-  this.y = 320;
-  this.width = 80;
-  this.height = 60;
-  this.img = "/home/max/test/Max's Game/images/megaman/megaBuster/megaBuster(loop).gif"; //change later :P
-};
-
-Megaman.prototype.drawMegaMan = function() {
-  var megaManImage = new Image();
-  megaManImage.src = this.img;
-  var that = this;
-  megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y, that.width, that.height);
-  
+//Keys for controls for player
+document.onkeydown = function(e){
+  var key = e.keyCode;
+  // console.log("whereToGo: ", whereToGo);
+  currentTargetIcon.move(key);
+  action(key);
 
 };
-
-var Enemy = function (name, hp, dmg_output, guard, attack_interval,img) {
-  this.name = name;
-  this.hp = hp;
-  this.dmg_output = dmg_output;
-  this.guard = false;
-  this.team = 'opponent';
-  this.attack_interval = attack_interval;
-  this.targeted = false;
-  this.x = 0;
-  this.y = 0;
-  this.width = 60;
-  this.height = 60;
-  this.img = img;
-
-}
-
-Enemy.prototype.drawEnemy = function(){
-  var enemyImage = new Image();
-  enemyImage.src = this.img;
-  var that = this;
-  enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
-  //check the placeArmy() to place on the battlefield;
-
-};
-
-var mettaur = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
-
-var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
-
-var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png");
-
-var round1 = [mettaur, mettaur2, mettaur3];
 
 var TargetIcon = function(round) {
   this.x = round[0].x;
@@ -268,22 +195,157 @@ TargetIcon.prototype.drawTargetIcon = function() {
 
 };
 
-TargetIcon.prototype.move = function() {
-  ctx3.clearRect(this.x, this.y, this.width, this.height);
+TargetIcon.prototype.move = function(number) {
+  
   switch(number){
   case 38: //the key ' ^ '
-  targetUp();
-      
+  ctx3.clearRect(this.x, this.y, this.width, this.height);
+  targetUp(round1);
+  currentTargetIcon.x = targetforDrawing(round1).x;
+  currentTargetIcon.y = targetforDrawing(round1).y;
+  currentTargetIcon.drawTargetIcon();    
+
     break;
   case 40: //the key ' \/ '
-  targetDown();
+  ctx3.clearRect(this.x, this.y, this.width, this.height);
+  targetDown(round1);
+  currentTargetIcon.x = targetforDrawing(round1).x;
+  currentTargetIcon.y = targetforDrawing(round1).y;
+  currentTargetIcon.drawTargetIcon(); 
 
     break;
   default:
   console.log("lol");  
   }
-  this.drawTargetIcon();
+  //this.drawTargetIcon();
 };
+
+function action(key) {
+  //switch //the "WASD and space button"
+  switch(key) {
+    case 87: //the key 'W'
+    /*if(firstCard.cooldown >= 30%) {
+      firstCard.cardActivate();
+    } */
+    dmgDished(round1);
+
+      break;
+    case 65: //the key 'A'
+    if(secondCard.cooldown /*>= 30%*/){
+      secondCard.cardActivate();
+    }
+      break;
+    case 83: //the key 'S'
+    if(thirdCard.cooldown /*>=30%*/){
+       thirdCard.cardActivate();
+     } 
+      break;
+    case 68: //the key 'D'
+    if(fourthCard.cooldown /*>=30%*/){
+      fourthCard.cardActivate();
+    }
+      break;
+    /*case 38: //the key ' ^ '
+    targetUp();
+        
+      break;
+    case 40: //the key ' \/ '
+    targetDown();
+
+      break;*/
+    case 32:
+    draw();
+    
+      default:
+    console.log("ok");  
+  }
+}
+
+// CHARACTERS & ENEMIES
+
+var Megaman = function(){
+  this.name = 'MegaMan.EXE';
+  this.hp = 100;
+  this.gauge = 100;//% //later
+  this.guard_cooldown = 100;//% //later
+  this.team = "player";
+  this.x = 140;
+  this.y = 320;
+  this.width = 80;
+  this.height = 60;
+  this.img = "images/megaman/still/still1.png"; //change later :P
+  this.guard = false;
+};
+
+Megaman.prototype.drawMegaMan = function() {
+  var megaManImage = new Image();
+  megaManImage.src = this.img;
+  var that = this;
+  megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y, that.width, that.height);
+  
+
+};
+
+var Enemy = function (name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs) {
+  this.name = name;
+  this.hp = hp;
+  this.dmg_output = dmg_output;
+  this.guard = false;
+  this.team = 'opponent';
+  this.attack_interval = attack_interval;
+  this.targeted = false;
+  this.x = 0;
+  this.y = 0;
+  this.width = 60;
+  this.height = 60;
+  this.img = img;
+  this.intervalSecs = intervalSecs;
+  this.timeOutSecs = timeOutSecs;
+};
+
+Enemy.prototype.drawEnemy = function(){
+  var enemyImage = new Image();
+  enemyImage.src = this.img;
+  var that = this;
+  enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
+  //check the placeArmy() to place on the battlefield;
+
+};
+
+Enemy.prototype.enemyAttackInterval = function(){
+  console.log('this inside enemyAttackIntervel ====', this);
+  
+setInterval(()=>this.enemyAttackTimeOut(/*this*/) ,this.intervalSecs + Math.floor(Math.random() * 3));
+clearInterval();
+};
+
+
+Enemy.prototype.enemyAttackTimeOut = function(/*context*/){
+  console.log('this inside enemyAttackTimeOut ====', this/*, context*/);
+  setTimeout(dmgReceived(this), this.timeOutSecs);
+};
+
+var mettaur = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png", 5000, 1000);
+
+var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png", 6000, 2000);
+
+var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png", 6000, 2000);
+
+var round1 = [mettaur, mettaur2];
+
+//Guard
+
+function guarding() {
+
+  if (currentMegaMan.guard_cooldown > 0) {
+    currentMegaMan.guard = true;
+    currentMegaMan.guard_cooldown -= 10;
+  }
+  
+
+}
+
+
 
 /*function placeTargetIcon(round) {
   var army = round;
@@ -300,7 +362,45 @@ TargetIcon.prototype.move = function() {
  }
 }*/
 
+//Frames
+/*function megaBusterInterval() {
+  var frame = 0;
+  var framez = setInterval(megaBusterFrames() , 100);
 
+  
+  
+  var firstFrame = new Image();
+  firstFrame.src = "images/megaman/megaBuster/megaBuster1.png";
+  var secondFrame = new Image();
+  secondFrame.src = "images/megaman/megaBuster/megaBuster2.png";
+  var thirdFrame = new Image();
+  thirdFrame.src = "images/megaman/megaBuster/megaBuster3.png"; 
+  
+  
+  ctx.clearRect(currentMegaMan.x, currentMegaMan.y, currentMegaMan.width, currentMegaMan.height);
+  if(frame === 3){
+    console.log('4');
+    ctx.drawImage(currentMegaMan.drawMegaMan());
+    clearInterval(framez);
+  
+  } else if (frame === 2) {
+    console.log('3');
+    ctx.drawImage(thirdFrame, currentMegaMan.x, currentMegaMan.y, currentMegaMan.width, currentMegaMan.height);
+    return frame++;
+  
+  } else if (frame === 1) {
+    console.log('2');
+    ctx.drawImage(secondFrame, currentMegaMan.x, currentMegaMan.y, currentMegaMan.width, currentMegaMan.height);
+    frame++;
+  
+  } else {
+    ctx.drawImage(firstFrame, currentMegaMan.x, currentMegaMan.y, currentMegaMan.width, currentMegaMan.height);
+    console.log('1');
+    return frame+=1;
+  }
+  return frame++;
+
+}*/
 
 // CARD MECHANICS
 function Card(dmg, name, rank, effect) {
@@ -315,6 +415,8 @@ var shootingStars = new Card(30, "Shooting Stars", "mega", function(){});
 
 //var template = document.getElementbyId("x");
 //template.innerText("yes");
+
+function cardActivate(){}
 
 function pickCards(){
   var deck = [];
