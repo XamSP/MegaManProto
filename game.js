@@ -28,6 +28,7 @@ function startRound(){
 function draw(round) {
   placeArmy(round);
   round.map(x => x.drawEnemy());
+  
   // currentMegaMan = new Megaman();  
   currentMegaMan = new Megaman().drawMegaMan();
   currentMegaMan = new Megaman(); 
@@ -37,6 +38,7 @@ function draw(round) {
   currentTargetIcon = new TargetIcon(round);
   // placeTargetIcon(round);
   updateHp();
+  startEnemyHpDisplay(round)
 }
 
 //Hp, Gauges, and dmgs. 
@@ -86,6 +88,10 @@ function enemyHpDisplay(enemy){
   } else if (enemy.hp < 1) {
     ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
   }
+}
+
+function startEnemyHpDisplay(round) {
+  round.map(enemy => enemyHpDisplay(enemy));
 }
 
 //Targeting and Placement
@@ -315,8 +321,13 @@ Enemy.prototype.drawEnemy = function(){
 Enemy.prototype.enemyAttackInterval = function(){
   console.log('this inside enemyAttackIntervel ====', this);
   
-setInterval(()=>this.enemyAttackTimeOut(/*this*/) ,this.intervalSecs + Math.floor(Math.random() * 3));
-clearInterval();
+  if (this.hp > 1) {
+    console.log(this);
+    setInterval(()=>this.enemyAttackTimeOut(/*this*/) ,this.intervalSecs + Math.floor(Math.random() * 3));
+    clearInterval();
+  } else {
+
+  }
 };
 
 
