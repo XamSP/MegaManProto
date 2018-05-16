@@ -58,12 +58,15 @@ function updateHp() {
 function dmgReceived(enemy) {
   if(currentMegaMan.guard === true){
     
-  } else if (currentMegaMan.guard === false){
+  } else if (currentMegaMan.guard === false && enemy.hp >0){
     console.log(enemy);
     currentMegaMan.hp -= enemy.dmg_output;
     updateHp();
+  } else {
+
   }
-  console.log('worked?');
+
+  console.log('Enemy atk impact!');
 }
 
 function dmgDished(round){
@@ -180,9 +183,9 @@ function targetforDrawing(round){
 document.onkeydown = function(e){
   var key = e.keyCode;
   // console.log("whereToGo: ", whereToGo);
-  currentTargetIcon.move(key);
+ 
   action(key);
-
+  currentTargetIcon.move(key);
 };
 
 var TargetIcon = function(round) {
@@ -221,7 +224,7 @@ TargetIcon.prototype.move = function(number) {
 
     break;
   default:
-  console.log("lol");  
+  console.log("not in TargetIcon.move");  
   }
   //this.drawTargetIcon();
 };
@@ -237,9 +240,8 @@ function action(key) {
 
       break;
     case 65: //the key 'A'
-    if(secondCard.cooldown /*>= 30%*/){
-      secondCard.cardActivate();
-    }
+    guarding();
+    
       break;
     case 83: //the key 'S'
     if(thirdCard.cooldown /*>=30%*/){
@@ -260,7 +262,7 @@ function action(key) {
 
       break;*/
     case 32:
-    draw();
+    draw(round1);
     
       default:
     console.log("ok");  
@@ -277,7 +279,7 @@ var Megaman = function(){
   this.team = "player";
   this.x = 140;
   this.y = 320;
-  this.width = 80;
+  this.width = 60;
   this.height = 60;
   this.img = "images/megaman/still/still1.png"; //change later :P
   this.guard = false;
@@ -342,15 +344,29 @@ var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/ima
 
 var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png", 6000, 2000);
 
-var round1 = [mettaur, mettaur2];
+var round1 = [mettaur, mettaur2, mettaur3];
 
 //Guard
 
 function guarding() {
+  var guardImg = new Image();
+  guardImg.src = "images/megaman/guard/guardx.png";
+
 
   if (currentMegaMan.guard_cooldown > 0) {
+    console.log('guarding');
     currentMegaMan.guard = true;
-    currentMegaMan.guard_cooldown -= 10;
+    currentMegaMan.guard_cooldown -= 100;
+    guardImg.onload = ()=>ctx2.drawImage(guardImg, currentMegaMan.x + 50, currentMegaMan.y, currentMegaMan.width / 2, currentMegaMan.height);
+    console.log('guard = ' + currentMegaMan.guard);
+  
+  } else if (currentMegaMan.guard_cooldown <= 0) {
+    currentMegaMan.guard = false;
+    currentMegaMan.guard_cooldown +=100;
+    console.log(currentMegaMan.guard_cooldown + "not guarding");
+    ctx2.clearRect(currentMegaMan.x + 50, currentMegaMan.y, currentMegaMan.width / 2, currentMegaMan.height);
+    console.log('guard = ' + currentMegaMan.guard);
+  
   }
   
 
