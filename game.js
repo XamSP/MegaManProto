@@ -70,12 +70,27 @@ function dmgReceived(enemy) {
 }
 
 function dmgDished(round){
+  function spliceFromRound(round, enemy){
+    if (enemy.hp <= 0){
+      // ctx3.clearRect(enemy.x, enemy.y, enemy.width, enemy.height);
+      //console.log("");
+      currentTargetIcon.move(999);
+      round.splice(enemy, 1);
+      
+      
+    } else {
+      //nothing
+    }
+  }
+  
   for (i=0; i < round.length; i++) {
+    
     if (round[i].targeted === true) {
       //random dmg since I haven't implemented the buster
       round[i].hp -= 1;
       enemyHpDisplay(round[i]);
-
+      spliceFromRound(round, round[i]);
+      
     } else {
       continue;
     }
@@ -135,12 +150,14 @@ function targetDown(round){
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
       //nothing lol
-    } else if (army[army.length - 1].targeted === true) {
+    //TESTING
+    //TESTING
+    } else if (army[army.length - 1].targeted === true && army[army.length - 1].status() === true) {
       army[army.length - 1].targeted = false;
       army[0].targeted = true;
       break;
     
-    } else if (army[i].targeted === true) {
+    } else if (army[i].targeted === true && army[i].status() === true) {
       army[i].targeted = false;
       army[i+1].targeted = true;
       break;
@@ -154,12 +171,24 @@ function targetUp(round){ //
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
       //nothing lol
-    } else if (army[0].targeted === true) {
+    
+    //if status is false (dead), remove from the round army and target next to them
+    // }else if (army[0].targeted === true && army[0].status() === false){
+    //   round.splice(i, 1);
+    //   army[army.length -1].targeted = true;
+    //   break;
+    
+    // } else if (army[i].targeted === true && army[i].status() === false) {
+    //   round.splice(i, 1);
+    //   army[i-1].targeted = true;
+    //   break;
+    
+    } else if (army[0].targeted === true && army[0].status() === true) {
       army[0].targeted = false;
       army[army.length -1].targeted = true;
       break;
     
-    } else if (army[i].targeted === true) {
+    } else if (army[i].targeted === true && army[i].status() === true) {
     army[i].targeted = false;
     army[i-1].targeted = true;
     break;
@@ -167,6 +196,26 @@ function targetUp(round){ //
   }
 }
 
+function autoTargetDown(round){
+  var army = round;
+  //for loop to change the target 
+  for(var i=0; i < army.length; i++) {
+  
+  if(army[army.length - 1].targeted === true && army[army.length - 1].status() === false) {
+    army[army.length - 1].targeted = false;
+    army[0].targeted = true;
+    break;
+  
+
+  }else if (army[i].targeted === true && army[i].status() === false){
+    army[i].targeted = false;
+    army[i+1].targeted = true;
+    break;
+  
+    
+  }
+ }
+}
 function targetforDrawing(round){ 
   var army = round;
   //for loop to change the target 
@@ -215,19 +264,39 @@ TargetIcon.prototype.move = function(number) {
   currentTargetIcon.drawTargetIcon();    
 
     break;
+    //Testing to see if I can ignore the erasing and drawing if the army.length = 1
   case 40: //the key ' \/ '
-  ctx3.clearRect(this.x, this.y, this.width, this.height);
+  var that = this;
   targetDown(round1);
+  drawTargetStuff(round1);
+
+    break;
+  case 999:
+  ctx3.clearRect(this.x, this.y, this.width, this.height);
+  autoTargetDown(round1);
   currentTargetIcon.x = targetforDrawing(round1).x;
   currentTargetIcon.y = targetforDrawing(round1).y;
   currentTargetIcon.drawTargetIcon(); 
-
-    break;
-  default:
+  
+  
+    default:
   console.log("not in TargetIcon.move");  
   }
   //this.drawTargetIcon();
 };
+
+function drawTargetStuff(round, that){
+  var army = round;
+  if (army.length === 1){
+    //nothing
+  } else {
+    ctx3.clearRect(that.x, that.y, that.width, that.height);
+    currentTargetIcon.x = targetforDrawing(round1).x;
+    currentTargetIcon.y = targetforDrawing(round1).y;
+    currentTargetIcon.drawTargetIcon(); 
+  }
+}
+
 
 function action(key) {
   //switch //the "WASD and space button"
@@ -283,7 +352,10 @@ var Megaman = function(){
   this.height = 60;
   this.img = "images/megaman/still/still1.png"; //change later :P
   this.guard = false;
+  this.status = function() {if (this.hp > 0) {return true;} else {return false;}
+  };
 };
+
 
 Megaman.prototype.drawMegaMan = function() {
   var megaManImage = new Image();
@@ -302,6 +374,8 @@ var Enemy = function (name, hp, dmg_output, guard, attack_interval,img, interval
   this.team = 'opponent';
   this.attack_interval = attack_interval;
   this.targeted = false;
+  this.status = function() {if (this.hp > 0) {return true;} else {return false;}
+  };
   this.x = 0;
   this.y = 0;
   this.width = 60;
@@ -344,7 +418,7 @@ var mettaur2 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/ima
 
 var mettaur3 = new Enemy("Mettaur",40,20,false,20,"/home/max/test/Max's Game/images/enemies/mettaur/mettaur_atk.png", 6000, 2000);
 
-var round1 = [mettaur, mettaur2, mettaur3];
+var round1 = [mettaur];
 
 //Guard
 
