@@ -69,6 +69,23 @@
   transform: translate(-20%, -20%); */
 }
 
+#gameover {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  margin: 0 auto;
+  width: 70%;
+}
+
+#restart {
+  margin-top:30% ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 10% ;
+  width: 20%;
+  font-size: 1em;
+}
+
 #startGame{
   margin-top:30% ;
   margin-left:40% ;
@@ -84,50 +101,3 @@
   background-color: darkgray;
 }
 
-/* Megaman */
-.megaManStance {
-  background-image: url("/home/max/test/Max's Game/images/megaman/still/still(loop).gif");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-
-.megaManBuster {
-  background-image: url("/home/max/test/Max's Game/images/megaman/megaBuster/megaBuster(loop).gif");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-
-.megaManGuard {
-  background-image: url("images/.png");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-
-.megaManSword {
-  background-image: url("images/.png");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-/* Enemies */
-
-/* Mettaur1 */
-
-.mettaur {
-  background-image: url("images/enemies/Mettaur/mettaur.png");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-
-.mettaurAtk {
-  background-image: url("images/.png");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
-
-/* Cards */
-
-.cardTemplate {
-  background-image: url("images/Card template (standard).png");
-  background-position:0 0;
-  background-repeat: no-repeat;
-}
