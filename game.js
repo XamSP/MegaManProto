@@ -1,7 +1,6 @@
-var currentRound = round1;
+var currentRound = roundBossPharaohMan;
 var currentMegaMan;
 var currentTargetIcon;
-
 
 document.addEventListener("DOMContentLoaded", function() {
   mainTheme.play();
@@ -34,101 +33,9 @@ function startGame(){
   mainTheme.stop();
   battleStart.play();
 
-  setTimeout(()=>{draw(round1);},1000);
-
+  setTimeout(()=>{draw(roundBossPharaohMan);},1000);
 }
-
-function startRound(){
-  startGame(); //might change later, to call the first two functions'getArmy and autoTarget'.
-  currentHP();
-}
-
-function draw(round) {
-  placeArmy(round);
-  round.map(x => x.drawEnemy(x.img));
-  round.map(x => x.enemyAttackInterval());
-  round.map(x => x.animation());
-  currentRound = round;
-  // currentMegaMan = new Megaman();  
-  currentMegaMan = new Megaman();
-  currentMegaMan.drawMegaMan(); 
-  //autoTarget(round);
-  autoTarget(round);
-  currentTargetIcon = new TargetIcon(round).drawTargetIcon();
-  currentTargetIcon = new TargetIcon(round);
-  // placeTargetIcon(round);
-  updateHp();
-  startEnemyHpDisplay(round);
-  guardGauge(currentMegaMan);
-  backgroundMusic(round);
-  megabar();
-
-
-}
-
-
-
-// function gameEnd(){
-//   var end = new Image();
-//   end.src= "";
-//   setTimeout(()=>{end.},0)
-  
-//   end.onload = ()=>images();
-
-// }
-
-//Hp, Gauges, and dmgs. 
-
-function megabar(){
-  //Just Megaman's mugshot
-  var bar = new Image();
-  bar.src = "images/background/mmface.png";
-  bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
-}
-
-function updateHp() {
- // $("#hp-bar").text(currentMegaMan.hp); just gonna canvas
-  if(currentMegaMan.hp >= 1) {
-  ctx2.clearRect(0 ,0 ,80, 80);
-  ctx2.font = "30px Arial";
-  ctx2.fillStyle = 'white';
-  ctx2.fillText(currentMegaMan.hp, 30, 30);
-  } else if (currentMegaMan.hp < 10) {
-  ctx2.clearRect(0,0,80,80);
-  deleted.play();
-  currentMegaMan = null;
-  ctx.clearRect(140,320,100,60);
-
-
-  setTimeout(()=>{document.location.reload()},1000);
-  // var gameover = document.getElementById("gameover");
-  // gameover.style.display = block;
-  }
-}
-
-function updateGuardCooldown(){
-  ctx2.clearRect(0 ,40 ,110, 80);
-  ctx2.font = "30px Arial"; 
-  ctx2.fillStyle = 'white';
-  ctx2.fillText(currentMegaMan.guard_cooldown+"%", 30, 70);
-  //ctx2.fillText("%",80, 90)
-}
-
-function dmgReceived(enemy) {
-  if(currentMegaMan.guard === true){
-    shielded.play();
-  } else if (currentMegaMan.guard === false && enemy.hp >0){
-    console.log(enemy);
-    currentMegaMan.hp -= enemy.dmg_output;
-    updateHp();
-    hurt.play();
-  } else {
-    
-  }
-
-  console.log('Enemy atk impact!');
-}
-
+//Start-up END
 
 //for the function dmgDished(round)
 function spliceFromRound(round, enemy){
@@ -143,11 +50,15 @@ function spliceFromRound(round, enemy){
     
     round.splice(i, 1);
     enemyDeleted.play();
-
+    roundVictory()
     
   } else {
     //nothing
   }
+}
+
+function roundVictory() {
+  
 }
 
 function dmgDished(round, dmg){
@@ -167,36 +78,7 @@ function dmgDished(round, dmg){
   }
 }
 
-function enemyHpDisplay(enemy){
-  if(enemy.hp >= 1 && enemy.width === 60) {
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -20, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
-    ctx2.fillStyle = 'white';
-    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
-  
-  } else if (enemy.hp >= 100){
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
-    ctx2.fillStyle = 'white';
-    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
-  
-  }else if (enemy.hp >= 1 && enemy.hp <=99 && enemy.width === 60){
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
-    ctx2.fillStyle = 'white';
-    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
-  
-  
-  }else if (enemy.hp >= 1 && enemy.hp <=99){
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
-    ctx2.fillStyle = 'white';
-    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 3), enemy.y + enemy.height+10);
-  
-  }else if (enemy.hp < 1) {
-    ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-  }
-}
+
 
 function startEnemyHpDisplay(round) {
   round.map(enemy => enemyHpDisplay(enemy));
@@ -238,7 +120,7 @@ function targetDown(round){
   //for loop to change the target 
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
-      //nothing lol
+    //nothing lol
     //TESTING
     //TESTING
     } else if (army[army.length - 1].targeted === true && army[army.length - 1].status() === true) {
@@ -304,9 +186,7 @@ function autoTargetDown(round){
   }else if (army[i].targeted === true){
     army[i].targeted = false;
     army[i+1].targeted = true;
-    break;
-  
-    
+    break; 
   }
  }
 }
@@ -379,8 +259,8 @@ function drawTargetStuff(round, that){
     //nothing
   } else {
     ctx3.clearRect(that.x, that.y, that.width, that.height);
-    currentTargetIcon.x = targetforDrawing(round1).x;
-    currentTargetIcon.y = targetforDrawing(round1).y;
+    currentTargetIcon.x = targetforDrawing(currentRound).x;
+    currentTargetIcon.y = targetforDrawing(currentRound).y;
     currentTargetIcon.drawTargetIcon(); 
   }
 }

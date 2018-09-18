@@ -1,4 +1,4 @@
-var Enemy = function (name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y) {
+let Enemy = function (name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y) {
   this.name = name;
   this.hp = hp;
   this.dmg_output = dmg_output;
@@ -17,20 +17,25 @@ var Enemy = function (name, hp, dmg_output, guard, attack_interval,img, interval
   this.timeOutSecs = timeOutSecs;
 };
 
+//Enemies
+  //Viruses
+  const mettaur = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
 
+  const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
 
-var pharaohMan = new Enemy("Pharaohman", 200, 0, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
+  const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
 
+  //Bosses
+  const pharaohMan = new Enemy("Pharaohman", 200, 0, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
+//Enemies END
 
-
-  Enemy.prototype.drawEnemy = function(img){
+Enemy.prototype.drawEnemy = function(img){
   ctx.clearRect(this.x, this.y, this.width, this.height);
   var enemyImage = new Image();
   enemyImage.src = img;
   var that = this;
   enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
   //check the placeArmy() to place on the battlefield;
-
 };
 
 Enemy.prototype.enemyAttackInterval = function(){
@@ -44,8 +49,6 @@ Enemy.prototype.enemyAttackInterval = function(){
     
   }
 };
-
-
 
 Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   //console.log('this inside enemyAttackTimeOut ====', this, context);
@@ -69,19 +72,40 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
     console.log("everything ded");
   }
 
-
-
 };
 
-function allEnemiesAtk(round){
-
+function enemyHpDisplay(enemy){
+  //lots of playing to show their hp right
+  if(enemy.hp >= 1 && enemy.width === 60) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -20, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
+  
+  } else if (enemy.hp >= 100){
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
+  
+  }else if (enemy.hp >= 1 && enemy.hp <=99 && enemy.width === 60){
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
+  
+  
+  }else if (enemy.hp >= 1 && enemy.hp <=99){
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+    ctx2.font = "30px Arial";
+    ctx2.fillStyle = 'white';
+    ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 3), enemy.y + enemy.height+10);
+  
+  }else if (enemy.hp < 1) {
+    ctx2.clearRect(enemy.x + (enemy.width / 4) -10, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
+  }
 }
 
-var mettaur = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
+function allEnemiesAtk(round){}
 
-var mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
 
-var mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
-
-var round1 = [mettaur, mettaur2, mettaur3];
-var round2 = [pharaohMan];
