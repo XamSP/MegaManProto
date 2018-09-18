@@ -26,7 +26,7 @@ let Enemy = function (name, hp, dmg_output, guard, attack_interval,img, interval
   const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
 
   //Bosses
-  const pharaohMan = new Enemy("Pharaohman", 200, 0, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
+  const pharaohMan = new Enemy("Pharaohman", 200, 10, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
 //Enemies END
 
 Enemy.prototype.drawEnemy = function(img){
@@ -56,6 +56,7 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   function getAnimation1(obj) {
     if (obj.name === "Mettaur"){
       mettaurAttackAnimation1(obj);
+      this.drawEnemyAtkAnimation(this.name, this.x, this.y);
 
     } else if (obj.name === "Pharaohman"){
       pharaohManAttackAnimation1(obj);
@@ -64,8 +65,8 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   
   if(this.hp > 0){
   getAnimation1(this);
-  this.drawEnemyAtkAnimation(this.name, this.x, this.y);
-  setTimeout(dmgReceived, this.timeOutSecs, this);
+  
+ // setTimeout(dmgReceived, this.timeOutSecs, this);
   } else {
     ctx.clearRect(this.x, this.y, this.width, this.height);
     clearInterval(interval);

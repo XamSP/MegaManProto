@@ -80,7 +80,7 @@ function dmgReceived(enemy) {
       shielded.play();//sound when guarded
     } else if (currentMegaMan.guard === false && enemy.hp >0){
       //here he's taking damage
-      console.log(enemy);
+      console.log(enemy.dmg_output);
       currentMegaMan.hp -= enemy.dmg_output;
       updateHp();
       hurt.play();
