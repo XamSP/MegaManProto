@@ -34,6 +34,8 @@ function pharaohManHovering(pharaohMan){
     setTimeout(()=>{pharaohMan.drawEnemy(pharaohMan.img);},1000);
   };
   
+  //make sure to fix pharaohMan
+
   if(pharaohMan.hp < 1){
     clearInterval(getId());
     console.log("Pharaohman interval = " + getId());
