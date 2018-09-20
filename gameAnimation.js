@@ -135,7 +135,7 @@ EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
 };
 //RELATED END
 
-Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y){
+Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y){//
   var that = this;
   //DONE IT PASSES THIS! console.log("that name = " + this.name);
   function getAnimation(name, obj){
@@ -148,7 +148,7 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y){
     }
   }
   getAnimation(this.name, this);
-  /*
+  /*n
   ctx2.clearRect(this.x, this.y, this.width, this.height);
   var EnemyAtkAnimationImage = new Image();
   EnemyAtkAnimationImage.src = img;
@@ -162,12 +162,11 @@ function mettaurAttackAnimation2(obj){
   //DONE IT PASSES THE OBJ console.log('Does mettaurAttackAnimation2 take the obj ' + obj.name);
 
   //var mettaurAttackFrame5 = new EnemyAtkAnimation('images/enemies/mettaur/mettaurAtk5.png');
-
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk1.png", 145); mettaurWave.play();},800);
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk2.png", 270); mettaurWave.stop(); mettaurWave.play();},1075);
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk3.png", 395); mettaurWave.stop(); mettaurWave.play();},1350);
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk4.png", 520); mettaurWave.stop(); mettaurWave.play();},1625);
-  setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk5.png", 645); mettaurWave.stop(); mettaurWave.play();},1900);
+  setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk5.png", 645); mettaurWave.stop(); mettaurWave.play(); dmgReceived(obj)},1900);
   setTimeout(()=>{ctx2.clearRect(mettaurAttackFrame.x -645, mettaurAttackFrame.y, mettaurAttackFrame.width, mettaurAttackFrame.height)}, 2000);
   setTimeout(()=>{reDrawGuard();},2000);
   function clear(obj){

@@ -53,10 +53,11 @@ Enemy.prototype.enemyAttackInterval = function(){
 Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   //console.log('this inside enemyAttackTimeOut ====', this, context);
   //done it passes this
+  const that = this;
   function getAnimation1(obj) {
     if (obj.name === "Mettaur"){
       mettaurAttackAnimation1(obj);
-      this.drawEnemyAtkAnimation(this.name, this.x, this.y);
+      that.drawEnemyAtkAnimation(that.name, that.x, that.y);
 
     } else if (obj.name === "Pharaohman"){
       pharaohManAttackAnimation1(obj);

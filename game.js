@@ -44,6 +44,8 @@ function spliceFromRound(round, enemy){
     //console.log("");
     currentTargetIcon.move(999);
     enemy.enemyAttackTimeOut(enemy); //for now, since both conditions were met on both functions, it gives the desired result; 
+
+    //????
     if(enemy.name === "Pharaohman"){
       pharaohManHovering(enemy);
     }
@@ -70,8 +72,9 @@ function dmgDished(round, dmg){
       round[i].hp -= dmg;
       enemyHpDisplay(round[i]);
       dmgDishedSound.play();
-      spliceFromRound(round, round[i], i);
-      
+      if (round[i].hp <= 0) {
+        spliceFromRound(round, round[i]);
+      }
     } else {
       continue;
     }
@@ -245,7 +248,7 @@ TargetIcon.prototype.move = function(number) {
   case 999:
   autoTargetDown(currentRound);
   drawTargetStuff(currentRound, that);
-  spliceFromRound(currentRound, that);
+  //spliceFromRound(currentRound, that);
     break;  
   default:
    
