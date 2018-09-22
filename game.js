@@ -1,4 +1,5 @@
-var currentRound = roundBossPharaohMan;
+let allRounds = firstSetOfRounds
+var currentRound = allRounds[0];
 var currentMegaMan;
 var currentTargetIcon;
 
@@ -33,7 +34,7 @@ function startGame(){
   mainTheme.stop();
   battleStart.play();
 
-  setTimeout(()=>{draw(roundBossPharaohMan);},1000);
+  setTimeout(()=>{draw(currentRound);},1000);
 }
 //Start-up END
 
@@ -52,15 +53,27 @@ function spliceFromRound(round, enemy){
     
     round.splice(i, 1);
     enemyDeleted.play();
-    roundVictory()
+    roundVictory(round)
     
   } else {
     //nothing
   }
 }
 
-function roundVictory() {
-  
+function roundVictory(round) {
+  if(currentRound.length <= 0){
+    nextRound(allRounds, round)
+  }
+}
+
+function nextRound(setOfRounds, round) {
+  console.log(`Before: setOfRounds = ${setOfRounds}`)
+  const index = setOfRounds.indexOf(round);
+  console.log(`The index of this round should be 0 and it equals TO = ${index}`)
+  setOfRounds.splice(index, 1);
+  console.log(`After: setOfRounds = ${setOfRounds}`)
+  currentRound = setOfRounds[0];
+  startGame();
 }
 
 function dmgDished(round, dmg){
@@ -411,8 +424,6 @@ function guardGauge(megaman){
 
   }
 }
-
-
 
 // CARD MECHANICS
 function Card(dmg, name, rank, effect) {
