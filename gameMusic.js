@@ -5,11 +5,14 @@ function sound(src) {
   this.sound.setAttribute("controls", "none");
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
+  this.sound.isItPlaying = false;
   this.play = function(){
       this.sound.play();
+      this.sound.isItPlaying = true;
   }
   this.stop = function(){
       this.sound.pause();
+      this.sound.isItPlaying = false;
   }
 }
 
@@ -53,7 +56,7 @@ function backgroundMusic(setOfRounds, round) {
 }
 
   if(currentRound[0].hp > 99){
-    if (!virusBustingBGM.paused && virusBustingBGM.currentTime) {
+    if (virusBustingBGM.isItPlaying) {
       //Its playing...do your job
       console.log('1 sound');
       naviBattleBGM.play();
@@ -61,24 +64,24 @@ function backgroundMusic(setOfRounds, round) {
     } else {
       //Not playing...maybe paused, stopped or never played.
       console.log('2 sound');
-      console.log(isPlaying(virusBustingBGM));
-      virusBustingBGM.pause()
+      //console.log(isPlaying(virusBustingBGM));
+      virusBustingBGM.stop()
       naviBattleBGM.play();
     };
     
   } else {
-      if (!naviBattleBGM.paused && naviBattleBGM.currentTime) {
+      if (naviBattleBGM.isItPlaying) {
       //Its playing...do your job
       console.log('3 sound');
-      naviBattleBGM.pause();
+      naviBattleBGM.stop();
       virusBustingBGM.play();
 
       } else {
       //Not playing...maybe paused, stopped or never played.
       console.log('4 sound');
-      console.log(virusBustingBGM);
+      //console.log(virusBustingBGM);
       virusBustingBGM.play();
-      console.log(virusBustingBGM.duration);  
+      //console.log(virusBustingBGM.duration);  
     };
   }
 }

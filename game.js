@@ -362,7 +362,7 @@ function guarding() {
   var guardImg = new Image();
   guardImg.src = "images/megaman/guard/guardx.png";
   //var limitOne = 0;
-  console.log(virusBustingBGM);
+  //console.log(virusBustingBGM);
   if (currentMegaMan.guard_cooldown >= 25 && currentMegaMan.guard === false) {
     console.log('guarding');
     currentMegaMan.guard = true;

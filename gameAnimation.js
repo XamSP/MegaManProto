@@ -66,11 +66,11 @@ function pharaohManLaser(obj) {
   setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL9.png", obj.x);},800);
   setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL10.png", obj.x);},900);
   setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL11.png", obj.x);dmgReceived(obj);},1000);
-  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL12.png", obj.x);},1100);
-  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL13.png", obj.x);},1200);
-  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL14.png", obj.x);},1300);
-  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL15.png", obj.x);},1400);
-  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL16.png", obj.x);},1500);
+  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL12aa.png", obj.x);},1100);
+  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL13a.png", obj.x);},1200);
+  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL14a.png", obj.x);},1300);
+  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL15a.png", obj.x);},1400);
+  setTimeout(()=>{laser.drawTheAtkAnimation("images/enemies/pharaohman/Laser/PharaohmanL16a.png", obj.x);},1500);
   setTimeout(()=>{ctx2.clearRect(laser.x - obj.x, laser.y, laser.width, laser.height);},1550);
 }
 
