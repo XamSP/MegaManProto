@@ -6,8 +6,12 @@ function draw(round) {
     round.map(x => x.animation());
     currentRound = round;
     // currentMegaMan = new Megaman();  
+    if(!currentMegaMan){
     currentMegaMan = new Megaman();
-    currentMegaMan.drawMegaMan(); 
+    } else {
+      currentMegaMan.hp += 40;
+      currentMegaMan.drawMegaMan(); 
+    }
     //autoTarget(round);
     autoTarget(round);
     currentTargetIcon = new TargetIcon(round).drawTargetIcon();
@@ -80,7 +84,7 @@ function dmgReceived(enemy) {
       shielded.play();//sound when guarded
     } else if (currentMegaMan.guard === false && enemy.hp >0){
       //here he's taking damage
-      console.log(enemy.dmg_output);
+      //console.log(enemy.dmg_output);
       currentMegaMan.hp -= enemy.dmg_output;
       updateHp();
       hurt.play();
@@ -88,6 +92,6 @@ function dmgReceived(enemy) {
       
     }
   
-    console.log('Enemy atk impact!');
+    //console.log('Enemy atk impact!');
   }
 //Megamans Battle-Functions END

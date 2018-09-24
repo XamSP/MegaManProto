@@ -30,7 +30,6 @@ function startGame(){
   menu.style.display = "none";
   game.style.display = "block";
 
-  console.log('worked?');
   mainTheme.stop();
   battleStart.play();
 
@@ -62,7 +61,8 @@ function spliceFromRound(round, enemy){
 
 function roundVictory(round) {
   if(currentRound.length <= 0){
-    nextRound(allRounds, round)
+    
+    setTimeout(()=>{nextRound(allRounds, round); winAnimation()}, 2000);
   }
 }
 
@@ -72,7 +72,9 @@ function nextRound(setOfRounds, round) {
   console.log(`The index of this round should be 0 and it equals TO = ${index}`)
   setOfRounds.splice(index, 1);
   console.log(`After: setOfRounds = ${setOfRounds}`)
+  ctx3.clearRect(currentTargetIcon.x , currentTargetIcon.y, currentTargetIcon.width, currentTargetIcon.height);
   currentRound = setOfRounds[0];
+  backgroundMusic(setOfRounds, index)
   startGame();
 }
 
@@ -360,7 +362,7 @@ function guarding() {
   var guardImg = new Image();
   guardImg.src = "images/megaman/guard/guardx.png";
   //var limitOne = 0;
-
+  console.log(virusBustingBGM);
   if (currentMegaMan.guard_cooldown >= 25 && currentMegaMan.guard === false) {
     console.log('guarding');
     currentMegaMan.guard = true;

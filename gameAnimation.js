@@ -130,8 +130,8 @@ EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
   var that = this;
   enemyAtkImage.onload = ()=>ctx2.drawImage(enemyAtkImage, that.x - x, that.y, that.width, that.height);
   reDrawGuard();
-  console.log(`The x, y in laser is ${that.x - x} ${that.y}`)
-  /*PASSES THE IMG*/ console.log("the img is "+img);
+  // console.log(`The x, y in laser is ${that.x - x} ${that.y}`)
+  /*PASSES THE IMG console.log("the img is "+img)*/;
 };
 //RELATED END
 
@@ -201,3 +201,22 @@ function reDrawGuard(){
     guardImg.onload = ()=>ctx2.drawImage(guardImg, currentMegaMan.x + 50, currentMegaMan.y, currentMegaMan.width / 2, currentMegaMan.height);
   }
 } 
+
+function winAnimation() {
+  const win = new Image();
+  win.src;
+  const winPics = ["images/win-animation/Win1.png","images/win-animation/Win2.png", 
+  "images/win-animation/Win3.png", "images/win-animation/Win4.png", "images/win-animation/Win5.png",
+  "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
+  ];
+
+  for (i=0; i < winPics.length; i++) {
+    
+    win.src = winPics[i]; 
+    setTimeout(win.onload = ()=>ctx.drawImage(win,300,300,200,60), 800 + (i * 1.2));
+    
+    if (i == winPics.length -1) {setTimeout(win.onload = ()=>ctx.clearRect(300,300,300,100), 900);}
+    //200 * 8 = 1600 (1.6 seconds)
+  }
+  //winTune.play();
+}
