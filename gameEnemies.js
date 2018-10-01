@@ -19,7 +19,7 @@ let Enemy = function (name, hp, dmg_output, guard, attack_interval,img, interval
 
 //Enemies
   //Viruses
-  const mettaur = new Enemy("Mettaur",3,0,false,20,"images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
+  const mettaur = new Enemy("Mettaur",40,10,false,20,"images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
 
   const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
 

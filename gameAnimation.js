@@ -51,7 +51,7 @@ function pharaohManHovering(pharaohMan){
 }
 
 function pharaohManLaser(obj) {
-  var laser = new EnemyAtkAnimation(obj);
+  let laser = new EnemyAtkAnimation(obj);
   laser.width += 250;
   laser.height += 20;
   laser.x -= 100
@@ -119,6 +119,51 @@ function EnemyAtkAnimation(obj){
   this.width = 60;
   this.height = 60;
   this.img = "";
+}
+
+function WinFrame() {
+  this.x = 350;
+  this.y = 300;
+  this.width = 200;
+  this.height = 60;
+  this.img = "images/win-animation/Win7.png";
+  this.drawWinAnimation = function(img) {
+    ctx.clearRect(this.x,this.y,this.width,this.height);
+    if(!img)
+      img = this.img;
+    let winImage = new Image();
+    winImage.src = img;
+    let that = this;
+    winImage.onload = ()=>ctx.drawImage(winImage, that.x, that.y, that.width, that.height);
+  
+  }
+}
+
+function winAnimation() {
+  const win = new WinFrame();
+  const winPics = ["images/win-animation/Win1.png","images/win-animation/Win2.png", 
+  "images/win-animation/Win3.png", "images/win-animation/Win4.png", "images/win-animation/Win5.png",
+  "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
+  ];
+
+  //for (i=0; i < winPics.length; i++){
+
+    setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 1 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 2 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 3 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[3])}, 4 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[4])}, 5 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 6 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 7 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[7])}, 8 * 100);
+    // if(i == winPics.length -1)
+    setTimeout(()=>ctx.clearRect(350,300,200,60), 9 * 100);
+
+  //}
+
+    //200 * 8 = 1600 (1.6 seconds)
+  
+  //winTune.play();
 }
 
 EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
@@ -202,21 +247,3 @@ function reDrawGuard(){
   }
 } 
 
-function winAnimation() {
-  const win = new Image();
-  win.src;
-  const winPics = ["images/win-animation/Win1.png","images/win-animation/Win2.png", 
-  "images/win-animation/Win3.png", "images/win-animation/Win4.png", "images/win-animation/Win5.png",
-  "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
-  ];
-
-  for (i=0; i < winPics.length; i++) {
-    
-    win.src = winPics[i]; 
-    setTimeout(win.onload = ()=>ctx.drawImage(win,300,300,200,60), 800 + (i * 1.2));
-    
-    if (i == winPics.length -1) {setTimeout(win.onload = ()=>ctx.clearRect(300,300,300,100), 900);}
-    //200 * 8 = 1600 (1.6 seconds)
-  }
-  //winTune.play();
-}
