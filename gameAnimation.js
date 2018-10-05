@@ -50,6 +50,18 @@ function pharaohManHovering(pharaohMan){
     
 }
 
+function pharaohManTrap(obj) {
+  let trap = new EnemyAtkAnimation(obj);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+  setTimeout(()=>{trap.drawTheAtkAnimation("images/enemies/pharaohman/.../...png", obj.x);},100);
+// add pharoahMans trap atk!
+}
+
 function pharaohManLaser(obj) {
   let laser = new EnemyAtkAnimation(obj);
   laser.width += 250;
