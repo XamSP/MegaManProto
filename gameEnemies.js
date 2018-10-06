@@ -24,7 +24,7 @@ let Enemy = function (name, hp, dmg_output, guard, attack_interval,img, interval
   const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
 
   const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
-
+  const bunny1 = new Enemy("Bunny", 90, 10, false, 20, "images/enemies/bunny/bunny.png", 7000, 2000, 0, 0);
   //Bosses
   const pharaohMan = new Enemy("Pharaohman", 200, 10, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
 //Enemies END
