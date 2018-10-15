@@ -61,12 +61,12 @@ function spliceFromRound(round, enemy){
 
 function roundVictory(round) {
   if(currentRound.length <= 0){
-    let win = document.getElementById("winAnimation"); ;
-    setTimeout(()=>{nextRound(allRounds, round); ()=>{
-      win.style.display = block;
-      console.log("round victory function is working!")  
-      setTimeout(()=>{win.style.display = block}, 5000)
-    }}, 2000);
+    let win = document.getElementsByClassName("winAnimation")[0];
+    setTimeout(()=>{win.style.display = "block"}, 200)
+    setTimeout(()=>{win.style.display = "none"}, 1600)
+    setTimeout(()=>{nextRound(allRounds, round); 
+      console.log("round victory function is working!");  
+    }, 2000);
   }
 }
 
