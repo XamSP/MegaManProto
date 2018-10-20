@@ -1,5 +1,4 @@
-const roundMettaur1 = [mettaur];
-const roundMettaur2 = [mettaur2, mettaur3]
+const roundMettaur1 = [mettaur, mettaur2, mettaur3]
 const roundBossPharaohMan = [pharaohMan];
-const firstSetOfRounds = [roundMettaur1, roundBossPharaohMan, roundMettaur2]
+const firstSetOfRounds = [roundMettaur1, roundBossPharaohMan]
 
