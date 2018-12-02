@@ -195,7 +195,7 @@ function targetUp(round){ //
   for(var i=0; i < army.length; i++) {
     if (army.length === 1){
       //nothing lol
-    
+      //making sure to comment it out
     //if status is false (dead), remove from the round army and target next to them
     // }else if (army[0].targeted === true && army[0].status() === false){
     //   round.splice(i, 1);
