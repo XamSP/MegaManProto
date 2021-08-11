@@ -8,6 +8,7 @@ Megaman.prototype.drawMegaMan = function(img) {
   megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y, that.width, that.height);
 };
 
+
 Megaman.prototype.drawMegaMan2 = function(img) {
   ctx4.clearRect(this.x,this.y,this.width,this.height);
   if(!img)
@@ -45,7 +46,6 @@ function pharaohManHovering(pharaohMan){
 
   if(pharaohMan.hp < 1){
     clearInterval(getId());
-    console.log("Pharaohman interval = " + getId());
   } 
     
 }

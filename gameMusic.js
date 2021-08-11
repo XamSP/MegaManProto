@@ -46,7 +46,6 @@ const deleted = new sound("music/Deleted HQ.wav");
 const enemyDeleted = new sound("music/explode HQ.ogg");
 
 function backgroundMusic(setOfRounds, round) {
-  
   var isPlaying = function (mySound) {
     return mySound
         && mySound.currentTime > 0
@@ -58,13 +57,10 @@ function backgroundMusic(setOfRounds, round) {
   if(currentRound[0].hp > 99){
     if (virusBustingBGM.isItPlaying) {
       //Its playing...do your job
-      console.log('1 sound');
       naviBattleBGM.play();
 
     } else {
       //Not playing...maybe paused, stopped or never played.
-      console.log('2 sound');
-      //console.log(isPlaying(virusBustingBGM));
       virusBustingBGM.stop()
       naviBattleBGM.play();
     };
@@ -72,16 +68,12 @@ function backgroundMusic(setOfRounds, round) {
   } else {
       if (naviBattleBGM.isItPlaying) {
       //Its playing...do your job
-      console.log('3 sound');
       naviBattleBGM.stop();
       virusBustingBGM.play();
 
       } else {
       //Not playing...maybe paused, stopped or never played.
-      console.log('4 sound');
-      //console.log(virusBustingBGM);
       virusBustingBGM.play();
-      //console.log(virusBustingBGM.duration);  
     };
   }
 }
