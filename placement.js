@@ -1,6 +1,5 @@
 //Targeting and Placement
 function placeArmy(round) {
-
     switch (round.length) {
       case 3 :
         round[0].x = 740;
@@ -32,6 +31,12 @@ function placeArmy(round) {
     }
   }
 
-  function startEnemyHpDisplay(round) {
-    round.map(enemy => enemyHpDisplay(enemy));
-  }
+function megabar() { //Just Megaman's mugshot
+  var bar = new Image();
+  bar.src = "images/background/mmface.png";
+  bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
+}
+
+function startEnemyHpDisplay(round) {
+  round.map(enemy => enemyHpDisplay(enemy));
+}

@@ -47,6 +47,34 @@ var Megaman = function() {
     }
   }
   
+  function buster() {
+    if(!currentMegaMan.atkCooldown && currentMegaMan.guard === false) {
+        currentMegaMan.atkCooldown = true;
+        
+        //drawing
+        busterAnimation();
+    }
+  }
+  function sword(){
+        if (currentMegaMan.guard_cooldown >= 30 && currentMegaMan.guard === false) {
+            currentMegaMan.guard_cooldown -= 30;
+            currentMegaMan.guard = true;
+            
+            //drawing
+            swordAnimation();
+        }
+    }
+
+  function cannon() {
+    if (!currentMegaMan.atkCooldown && currentMegaMan.guard_cooldown >= 20 && currentMegaMan.guard === false) {
+        currentMegaMan.guard_cooldown -= 30;
+        currentMegaMan.atkCooldown = true;
+
+        //drawing
+        cannonAnimation();
+    }
+  }
+
   function guardGauge(megaman){
     var guardInterval = setInterval(() => guardRegen(megaman), 60);
     clearInterval();

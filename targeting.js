@@ -7,20 +7,9 @@ function autoTarget(round){
   function targetDown(round){
     var army = round;
     
-    //Working on it - FIXME
-    switch (army.length) {
-      case 1:
-        break;
-  
-      case 2:
-  
-      default:
-          currentTargetIcon
-    }
-    
    //for loop to change the target 
     for(var i=0; i < army.length; i++) {
-      if (army.length === 1){
+      if (army.length === 1) {
       //nothing lol
   
       } else if (army[army.length - 1].targeted === true && army[army.length - 1].status() === true) {
@@ -34,19 +23,18 @@ function autoTarget(round){
         army[i+1].targeted = true;
         targetSound.play();
         break;
-    }
+      }
     }
   }
   
   function targetUp(round){ //
     var army = round;
     //for loop to change the target 
-    for(var i=0; i < army.length; i++) {
+    for(var i = 0; i < army.length; i++) {
       if (army.length === 1){
         //nothing lol
   
       //if status is false (dead), remove from the round army and target next to them
-      
       } else if (army[0].targeted === true && army[0].status() === true) {
         army[0].targeted = false;
         army[army.length -1].targeted = true;

@@ -1,11 +1,11 @@
-Megaman.prototype.drawMegaMan = function(img) {
-  ctx.clearRect(this.x,this.y,this.width,this.height);
+Megaman.prototype.drawMegaMan = function(img, extraWidth = 0, extraHeight = 0) {
+  ctx.clearRect(this.x, this.y - extraHeight, this.width + extraWidth, this.height + extraHeight);
   if(!img)
     img = this.img;
   var megaManImage = new Image();
   megaManImage.src = img;
   var that = this;
-  megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y, that.width, that.height);
+  megaManImage.onload = ()=>ctx.drawImage(megaManImage, that.x, that.y - extraHeight, that.width + extraWidth, that.height + extraHeight);
 };
 
 
@@ -90,6 +90,35 @@ function pharaohManAttackAnimation1(obj){
   pharaohManLaser(obj);
 }
 
+function busterAnimation() {
+  currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster1.png');
+        setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster2.png');},50);
+        setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster3.png');},100);
+        setTimeout(()=>{currentMegaMan.drawMegaMan(); currentMegaMan.atkCooldown=false;},150);
+        dmgDished(currentRound, 3);
+        busterShot.play();
+}
+
+function cannonAnimation() {
+  ctx.clearRect(140,320,100,60);
+  currentMegaMan.drawMegaMan('images/megaman/cannon/megamanCannon1.png', 25, 20);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon1.png", 27, 20);},50);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon2.png", 27, 20);},100);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon3.png", 27, 20);},150);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon4.png", 27, 20);},200);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon5.png", 27, 20);},250);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon6.png", 27, 20);},300);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon7.png", 27, 20);},350);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon8.png", 27, 20); dmgDished(currentRound, 20)},400);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon9.png", 27, 20);},450);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon10.png", 27, 20);},500);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon11.png", 27, 20);},550);
+  setTimeout(()=>{currentMegaMan.drawMegaMan("images/megaman/cannon/megamanCannon12.png", 27, 20);},600);
+  setTimeout(()=>{ctx4.clearRect(currentMegaMan.x, currentMegaMan.y, currentMegaMan.width, currentMegaMan.height);currentMegaMan.x = 140;currentMegaMan.y=320;currentMegaMan.width=100;currentMegaMan.height=60;},681);
+  setTimeout(()=>{ctx.clearRect(200,300,200,100);currentMegaMan.atkCooldown=false;},650);
+  setTimeout(()=>{currentRound.map(x=> enemyHpDisplay(x));currentMegaMan.drawMegaMan();},700);
+}
+
 function swordAnimation() {
   ctx.clearRect(140,320,100,60);
   currentMegaMan.x = currentTargetIcon.x- 80;
@@ -147,7 +176,6 @@ function WinFrame() {
     winImage.src = img;
     let that = this;
     winImage.onload = ()=>ctx.drawImage(winImage, that.x, that.y, that.width, that.height);
-  
   }
 }
 
@@ -158,8 +186,6 @@ function winAnimation() {
   "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
   ];
 
-  //for (i=0; i < winPics.length; i++){
-
     setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 1 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 2 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 3 * 100);
@@ -168,14 +194,7 @@ function winAnimation() {
     setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 6 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 7 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[7])}, 8 * 100);
-    // if(i == winPics.length -1)
     setTimeout(()=>ctx.clearRect(350,300,200,60), 9 * 100);
-
-  //}
-
-    //200 * 8 = 1600 (1.6 seconds)
-  
-  //winTune.play();
 }
 
 EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
@@ -187,17 +206,14 @@ EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
   var that = this;
   enemyAtkImage.onload = ()=>ctx2.drawImage(enemyAtkImage, that.x - x, that.y, that.width, that.height);
   reDrawGuard();
-  // console.log(`The x, y in laser is ${that.x - x} ${that.y}`)
-  /*PASSES THE IMG console.log("the img is "+img)*/;
-};
-//RELATED END
 
+};
+
+//RELATED END
 Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y){//
   var that = this;
-  //DONE IT PASSES THIS! console.log("that name = " + this.name);
   function getAnimation(name, obj){
     if(name === "Mettaur"){
-      //PASSES THE OBJ console.log("getAnimation was called for " + obj.name);
       mettaurAttackAnimation2(obj);
     
     }else if(name === "Pharaohman"){
@@ -205,20 +221,18 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y){//
     }
   }
   getAnimation(this.name, this);
-  /*n
-  ctx2.clearRect(this.x, this.y, this.width, this.height);
-  var EnemyAtkAnimationImage = new Image();
-  EnemyAtkAnimationImage.src = img;
-  var that = this;
-  EnemyAtkAnimationImage.onload = ()=>ctx2.drawImage(EnemyAtkAnimationImage, that.x, that.y, that.width, that.height);
-  */
+    /*n
+    ctx2.clearRect(this.x, this.y, this.width, this.height);
+    var EnemyAtkAnimationImage = new Image();
+    EnemyAtkAnimationImage.src = img;
+    var that = this;
+    EnemyAtkAnimationImage.onload = ()=>ctx2.drawImage(EnemyAtkAnimationImage, that.x, that.y, that.width, that.height);
+    */
 };
 
 function mettaurAttackAnimation2(obj){
   var mettaurAttackFrame = new EnemyAtkAnimation(obj);
-  //DONE IT PASSES THE OBJ console.log('Does mettaurAttackAnimation2 take the obj ' + obj.name);
 
-  //var mettaurAttackFrame5 = new EnemyAtkAnimation('images/enemies/mettaur/mettaurAtk5.png');
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk1.png", 145); mettaurWave.play();},800);
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk2.png", 270); mettaurWave.stop(); mettaurWave.play();},1075);
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk3.png", 395); mettaurWave.stop(); mettaurWave.play();},1350);
@@ -226,23 +240,22 @@ function mettaurAttackAnimation2(obj){
   setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk5.png", 645); mettaurWave.stop(); mettaurWave.play(); dmgReceived(obj)},1900);
   setTimeout(()=>{ctx2.clearRect(mettaurAttackFrame.x -645, mettaurAttackFrame.y, mettaurAttackFrame.width, mettaurAttackFrame.height)}, 2000);
   setTimeout(()=>{reDrawGuard();},2000);
-  function clear(obj){
-  //console.log(obj.meme);
-  ctx2.clearRect(obj.x -500, obj.y, obj.width, obj.height);
-  }
 
+  function clear(obj) {
+    ctx2.clearRect(obj.x -500, obj.y, obj.width, obj.height);
+  }
 }
 
 function reDrawEnemyHp(round) {
   var army = round;
   if(army.length === 3){
-  enemyHpDisplay(army[0]);
-  enemyHpDisplay(army[1]);
-  enemyHpDisplay(army[2]);
+    enemyHpDisplay(army[0]);
+    enemyHpDisplay(army[1]);
+    enemyHpDisplay(army[2]);
 
   } else if (army.length === 2){
-  enemyHpDisplay(army[0]);
-  enemyHpDisplay(army[1]);
+    enemyHpDisplay(army[0]);
+    enemyHpDisplay(army[1]);
 
   } else {
     enemyHpDisplay(army[0]);

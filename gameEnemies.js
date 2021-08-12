@@ -1,34 +1,52 @@
-let Enemy = function (name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y) {
-  this.name = name;
-  this.hp = hp;
-  this.dmg_output = dmg_output;
-  this.guard = false;
-  this.team = 'opponent';
-  this.attack_interval = attack_interval;
-  this.targeted = false;
-  this.status = function() {if (this.hp > 0) {return true;} else {return false;}
+class Enemy {
+  constructor (name, hp, dmg_output, guard, attack_interval, img, intervalSecs, timeOutSecs, x, y) {
+    this.name = name;
+    this.hp = hp;
+    this.dmg_output = dmg_output;
+    this.guard = false;
+    this.team = 'opponent';
+    this.attack_interval = attack_interval;
+    this.targeted = false;
+    this.status = function() {
+      if (this.hp > 0) {return true;} else {return false;}
+    };
+    this.x = 0;
+    this.y = 0;
+    this.width = 60 + x;
+    this.height = 60 + y;
+    this.img = img;
+    this.intervalSecs = intervalSecs;
+    this.timeOutSecs = timeOutSecs;
   };
-  this.x = 0;
-  this.y = 0;
-  this.width = 60 + x;
-  this.height = 60 + y;
-  this.img = img;
-  this.intervalSecs = intervalSecs;
-  this.timeOutSecs = timeOutSecs;
-};
+}
 
 //Enemies
-  //Viruses
-  const mettaur = new Enemy("Mettaur", 40, 10, false, 20, "images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
+//Viruses, Got to turn them into a class
+class Mettaur extends Enemy {
+  constructor (name = "Mettaur", hp = 40, dmg_output = 10, guard = false, attack_interval = 20, img = "images/enemies/mettaur/mettaur.png", 
+              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
 
-  const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
 
-  const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
+// const mettaur = new Enemy("Mettaur", 40, 10, false, 20, "images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
 
-  const bunny1 = new Enemy("Bunny", 90, 10, false, 20, "images/enemies/bunny/bunny.png", 7000, 2000, 0, 0);
-  
-  //Bosses
-  const pharaohMan = new Enemy("Pharaohman", 200, 10, false,0, "images/enemies/pharaohman/PharaohMan1.png",2000, 1500, 40,40);
+// const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
+
+// const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
+
+// const bunny1 = new Enemy("Bunny", 90, 10, false, 20, "images/enemies/bunny/bunny.png", 7000, 2000, 0, 0);
+
+//Bosses
+class PharaohMan extends Enemy {
+  constructor (name = "PharaohMan", hp = 200, dmg_output = 10, guard = false, attack_interval = 0, img = "images/enemies/pharaohman/PharaohMan1.png", 
+              intervalSecs = 2000, timeOutSecs = 1500, x = 40, y = 40) {
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
+  }
+}
+
+//const pharaohMan = new Enemy("PharaohMan", 200, 10, false, 0, "images/enemies/pharaohman/PharaohMan1.png", 2000, 1500, 40, 40);
 //Enemies END
 
 Enemy.prototype.drawEnemy = function(img){

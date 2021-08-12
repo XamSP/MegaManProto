@@ -42,12 +42,6 @@ function gameEnd() {}
 //Hp, Gauges, and dmgs. 
 
 //Megamans Battle-Functions
-function megabar() { //Just Megaman's mugshot
-    var bar = new Image();
-    bar.src = "images/background/mmface.png";
-    bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
-  }
-
 function updateHp() {
     /* This what happens when enemy hits and triggers this 
     function, probably need to update this when I add healing */
