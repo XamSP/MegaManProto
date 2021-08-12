@@ -15,7 +15,7 @@ function draw(round) {
       currentMegaMan.drawMegaMan(); //Just draw Megaman without initializing another object of Megaman
     }
 
-    //Place TargetIcon on enemy
+    //Place TargetIcon on enemy(s)
     autoTarget(round);
     currentTargetIcon = new TargetIcon(round).drawTargetIcon();
     currentTargetIcon = new TargetIcon(round);
@@ -26,6 +26,7 @@ function draw(round) {
     guardGauge(currentMegaMan);
     backgroundMusic(round);
     megabar(); //Megaman's Mugshot
+    //displayActions();
   }
 
 function startRound(){
@@ -45,26 +46,26 @@ function gameEnd() {}
 function updateHp() {
     /* This what happens when enemy hits and triggers this 
     function, probably need to update this when I add healing */
-     if (currentMegaMan.hp >= 1) {
+     if (currentMegaMan.hp > 0) {
         ctx2.clearRect(0 ,0 ,80, 80);
         ctx2.font = "30px Arial";
         ctx2.fillStyle = 'white';
         ctx2.fillText(currentMegaMan.hp, 30, 30);
 
-     } else if (currentMegaMan.hp < 10) {
+     } else {
         ctx2.clearRect(0,0,80,80);
         deleted.play();
         currentMegaMan = null;
         ctx.clearRect(140,320,100,60);
     
         //refresh page to start again
-        setTimeout(()=>{document.location.reload()},1000);
+        setTimeout(()=>{document.location.reload()}, 1000);
      }
 }
 
 function dmgDished(round, dmg) {
   
-  for (i=0; i < round.length; i++) {
+  for (i = 0; i < round.length; i++) {
     
     if (round[i].targeted === true) {
       //random dmg since I haven't implemented the buster
@@ -88,11 +89,11 @@ function updateGuardCooldown(){
 }
 
 function dmgReceived(enemy) {
-    //dmg megaman takes if he is not guarding (also dodging counts as guarding!)
+    //dmg megaman takes if he is not guarding (also dodging counts as guarding once implemented!)
     if(currentMegaMan.guard === true){
       shielded.play(); //sound when guarded
 
-    } else if (currentMegaMan.guard === false && enemy.hp >0){
+    } else if (currentMegaMan.guard === false && enemy.hp > 0){
       //Here he is taking damage
       currentMegaMan.hp -= enemy.dmg_output; 
       updateHp();

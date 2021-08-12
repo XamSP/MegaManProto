@@ -44,9 +44,22 @@ function spliceFromRound(round, enemy){
     currentTargetIcon.move(999);
     enemy.enemyAttackTimeOut(enemy); //for now, since both conditions were met on both functions, it gives the desired result; 
 
-    //????
-    if(enemy.name === "Pharaohman") {
-      pharaohManHovering(enemy);
+    //this ensures to stop the still animation 
+    switch (enemy.name) {
+      case "Swordy":
+
+          break;
+
+      case "CanDevil":
+
+          break;
+
+      case "PharaohMan":
+          pharaohManHovering(enemy);
+          break;
+
+      default:
+          break;
     }
     
     round.splice(i, 1);

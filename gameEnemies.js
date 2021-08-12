@@ -30,7 +30,45 @@ class Mettaur extends Enemy {
   }
 }
 
-// const bunny1 = new Enemy("Bunny", 90, 10, false, 20, "images/enemies/bunny/bunny.png", 7000, 2000, 0, 0);
+class Bunny extends Enemy {
+  constructor(name = "Bunny", hp = 50, dmg_output = 20, guard = false, attack_interval = 30, img = "images/enemies/bunny/bunny1.png", 
+              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
+
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
+
+class Billy extends Enemy {
+  constructor(name = "Billy", hp = 40, dmg_output = 30, guard = false, attack_interval = 40, img = "images/enemies/billy/billy1.png", 
+  intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
+    
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
+
+class Swordy extends Enemy {
+  constructor(name = "Swordy", hp = 60, dmg_output = 30, guard = false, attack_interval = 30, img = "images/enemies/swordy/swordyStill1.png", 
+              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
+
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
+
+class CanDevil extends Enemy {
+  constructor(name = "CanDevil", hp = 70, dmg_output = 20, guard = false, attack_interval = 20, img = "images/enemies/candevil/CanDevil1.png", 
+              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0){
+    
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
+
+class Lavagon extends Enemy {
+  constructor(name = "Lavagon", hp = 120, dmg_output = 40, guard = false, attack_interval = 30, img = "images/enemies/lavagon/lavagon1.png", 
+              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
+
+    super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
+  }
+}
 
 //Bosses
 class PharaohMan extends Enemy {
@@ -39,7 +77,6 @@ class PharaohMan extends Enemy {
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
   }
 }
-//Enemies END
 
 Enemy.prototype.drawEnemy = function(img){
   ctx.clearRect(this.x, this.y, this.width, this.height);
@@ -61,13 +98,39 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   const that = this;
 
   function getAnimation1(obj) {
-    if (obj.name === "Mettaur"){
-      mettaurAttackAnimation1(obj);
-      that.drawEnemyAtkAnimation(that.name, that.x, that.y);
+    var enemyName = obj.name;
 
-    } else if (obj.name === "PharaohMan"){
-      pharaohManAttackAnimation1(obj);
+    switch (enemyName) {
+      case "Mettaur":
+        mettaurAttackAnimation1(obj);
+        that.drawEnemyAtkAnimation(that.name, that.x, that.y);
+        break;
+
+      case "Billy":
+        //billyAttackAnimation();
+        break;
+
+      case "Bunny":
+        //bunnyAttackAnimation();
+        break;
+
+      case "Swordy":
+        //swordyAttackAnimation();
+        break;
+
+      case "CanDevil":
+        //canDevilAttackAnimation();
+        break;
+
+      case "PharaohMan":
+        pharaohManAttackAnimation1(obj);
+        break;
+
+      default:
+        console.log("Animation not found!");
+        break;
     }
+
   }
   
   if (this.hp > 0){
@@ -79,6 +142,7 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
   }
 
 };
+//Mettaur.prototype.enemyAttackTimeOut
 
 function enemyHpDisplay(enemy){
   //lots of playing to show their hp right
@@ -113,5 +177,3 @@ function enemyHpDisplay(enemy){
 }
 
 function allEnemiesAtk(round){}
-
-
