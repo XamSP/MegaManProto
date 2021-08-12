@@ -141,6 +141,24 @@ function bunnyAttackAnimation2() {
 
 }
 
+function swordyStillSwordFrames(swordy) {
+    function getId(){
+        var eminatingSword = setInterval(()=>{swordyEminatingFrames(swordy);}, 1200); 
+        return eminatingSword;
+    }
+    getId();
+
+    function swordyEminatingFrames(swordy) {
+      swordy.drawEnemy('images/enemies/pharaohman/PharaohMan2.png');
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill2.png');},200);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill3.png');},400);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill4.png');},600);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill5.png');},800);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill6.png');},1000);
+      setTimeout(()=>{swordy.drawEnemy(swordy.img);},1200);
+    };
+}
+
 function swordyAttackAnimation1() {
 
 }
@@ -149,13 +167,20 @@ function swordyAttackAnimation2() {
 
 }
 
+function canDevilFlamesLit() {
+
+}
+
+
+
 function canDevilAttackAnimation1() {
 
 }
 
 function canDevilAttackAnimation2() {
-    
+
 }
+
 
 function pharaohManHovering(pharaohMan){
     //Need to clear interval with the right ID
