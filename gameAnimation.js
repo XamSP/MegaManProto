@@ -21,7 +21,7 @@ Megaman.prototype.drawMegaMan2 = function(img) {
 
 
 Enemy.prototype.animation = function(){
-  if (this.name === "Pharaohman") {
+  if (this.name === "PharaohMan") {
     pharaohManHovering(this);
   }
 }

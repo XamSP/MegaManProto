@@ -33,6 +33,7 @@ function startGame(){
   mainTheme.stop();
   battleStart.play();
 
+  console.log(currentRound);
   setTimeout(()=>{draw(currentRound);},1000);
 }
 //Start-up END

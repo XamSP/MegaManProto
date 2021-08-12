@@ -30,12 +30,6 @@ class Mettaur extends Enemy {
   }
 }
 
-// const mettaur = new Enemy("Mettaur", 40, 10, false, 20, "images/enemies/mettaur/mettaur.png", 3000, 2000,0,0);
-
-// const mettaur2 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 5000, 2000,0,0);
-
-// const mettaur3 = new Enemy("Mettaur",90,20,false,20,"images/enemies/mettaur/mettaur.png", 7000, 2000,0,0);
-
 // const bunny1 = new Enemy("Bunny", 90, 10, false, 20, "images/enemies/bunny/bunny.png", 7000, 2000, 0, 0);
 
 //Bosses
@@ -45,8 +39,6 @@ class PharaohMan extends Enemy {
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
   }
 }
-
-//const pharaohMan = new Enemy("PharaohMan", 200, 10, false, 0, "images/enemies/pharaohman/PharaohMan1.png", 2000, 1500, 40, 40);
 //Enemies END
 
 Enemy.prototype.drawEnemy = function(img){
@@ -73,7 +65,7 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
       mettaurAttackAnimation1(obj);
       that.drawEnemyAtkAnimation(that.name, that.x, that.y);
 
-    } else if (obj.name === "Pharaohman"){
+    } else if (obj.name === "PharaohMan"){
       pharaohManAttackAnimation1(obj);
     }
   }

@@ -7,9 +7,11 @@ function placeArmy(round) {
         
         round[1].x = 680;
         round[1].y = 320;
+        round[1].intervalSecs = round[1].intervalSecs * 1.2;
         
         round[2].x = 740;
         round[2].y = 340;
+        round[2].intervalSecs = round[2].intervalSecs * 1.4;
         break;
   
       case 2 : 
@@ -18,6 +20,7 @@ function placeArmy(round) {
         
         round[1].x = 720;
         round[1].y = 340;
+        round[1].intervalSecs = round[1].intervalSecs * 1.2;
         break;
   
       case 1 :
