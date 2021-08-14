@@ -17,6 +17,7 @@ class Enemy {
     this.img = img;
     this.intervalSecs = intervalSecs;
     this.timeOutSecs = timeOutSecs;
+    this.intervalID;
   };
 }
 
@@ -48,7 +49,7 @@ class Billy extends Enemy {
 
 class Swordy extends Enemy {
   constructor(name = "Swordy", hp = 60, dmg_output = 30, guard = false, attack_interval = 30, img = "images/enemies/swordy/swordyStill1.png", 
-              intervalSecs = 3000, timeOutSecs = 2000, x = 0, y = 0) {
+              intervalSecs = 3000, timeOutSecs = 2000, x = 20, y = 20) {
 
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
   }
@@ -72,8 +73,9 @@ class Lavagon extends Enemy {
 
 //Bosses
 class PharaohMan extends Enemy {
-  constructor (name = "PharaohMan", hp = 200, dmg_output = 10, guard = false, attack_interval = 0, img = "images/enemies/pharaohman/PharaohMan1.png", 
+  constructor (name = "PharaohMan", hp = 20, dmg_output = 10, guard = false, attack_interval = 0, img = "images/enemies/pharaohman/PharaohMan1.png", 
               intervalSecs = 2000, timeOutSecs = 1500, x = 40, y = 40) {
+                
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
   }
 }
@@ -84,7 +86,14 @@ Enemy.prototype.drawEnemy = function(img){
   enemyImage.src = img;
   var that = this;
   enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
-  //check the placeArmy() to place on the battlefield;
+};
+
+Enemy.prototype.drawEnemyRightOfMegaman = function(img){
+  ctx.clearRect(this.x, this.y, this.width, this.height);
+  var enemyImage = new Image();
+  enemyImage.src = img;
+  var that = this;
+  enemyImage.onload = ()=>ctx.drawImage(enemyImage, currentMegaMan.x + 120, currentMegaMan.y, that.width, that.height);
 };
 
 Enemy.prototype.enemyAttackInterval = function(){
@@ -115,7 +124,9 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
         break;
 
       case "Swordy":
-        //swordyAttackAnimation();
+        swordyAttackAnimation1(obj);
+        that.drawEnemyAtkAnimation(that.name, that.x, that.y);
+
         break;
 
       case "CanDevil":

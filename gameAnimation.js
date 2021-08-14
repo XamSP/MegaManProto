@@ -56,6 +56,7 @@ function swordAnimation() {
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword1.png");},50);
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword2.png");},100);
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword3.png");},150);
+  swordSwing.play();
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword4.png"); dmgDished(currentRound, 20)},200);
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword5.png");},250);
   setTimeout(()=>{currentMegaMan.drawMegaMan2("images/megaman/sword/sword6.png");},300);
@@ -91,7 +92,6 @@ function winAnimation() {
   "images/win-animation/Win3.png", "images/win-animation/Win4.png", "images/win-animation/Win5.png",
   "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
   ];
-
     setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 1 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 2 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 3 * 100);

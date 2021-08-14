@@ -1,11 +1,11 @@
 Enemy.prototype.animation = function() {
     switch (this.name) {
         case "Swordy":
-
+            swordyStillSwordFrames(this);
             break;
 
         case "CanDevil":
-
+            canDevilFlamesLit(this);
             break;
 
         case "PharaohMan":
@@ -45,7 +45,7 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y) {
           break;
   
         case "Swordy":
-          //swordyAttackAnimation2();
+          swordyAttackAnimation2(obj);
           break;
   
         case "CanDevil":
@@ -143,35 +143,97 @@ function bunnyAttackAnimation2() {
 
 function swordyStillSwordFrames(swordy) {
     function getId(){
-        var eminatingSword = setInterval(()=>{swordyEminatingFrames(swordy);}, 1200); 
+        var eminatingSword = setInterval(()=>{swordyEminatingFrames(swordy);}, 500); 
         return eminatingSword;
     }
-    getId();
+    
+    if (swordy.hp < 1) { 
+        intervalObject.clear(swordy.intervalID);
+    } else {
+        console.log("entering");
+        swordy.intervalID = getId();
+        intervalObject.intervals.add(swordy.intervalID);
+    }
 
     function swordyEminatingFrames(swordy) {
-      swordy.drawEnemy('images/enemies/pharaohman/PharaohMan2.png');
-      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill2.png');},200);
-      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill3.png');},400);
-      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill4.png');},600);
-      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill5.png');},800);
-      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill6.png');},1000);
-      setTimeout(()=>{swordy.drawEnemy(swordy.img);},1200);
+        console.log("eminating")
+      swordy.drawEnemy('images/enemies/swordy/swordyStill2.png');
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill3.png');},100);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill4.png');},200);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill5.png');},300);
+      setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill6.png');},400);
+      setTimeout(()=>{swordy.drawEnemy(swordy.img);},1000);
     };
-}
-
-function swordyAttackAnimation1() {
 
 }
 
-function swordyAttackAnimation2() {
-
+function swordyAttackAnimation1(swordy) {
+    swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance1.png');
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance2.png');},100);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance3.png');},200);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance4.png');},300);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance5.png');},400);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing1.png');},500);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing2.png');},600);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing3.png');},700);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing4.png');},800);
+    setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing5.png');},900);
+    setTimeout(()=>{swordy.drawEnemy(swordy.img);},1000);
 }
 
-function canDevilFlamesLit() {
+function swordyAttackAnimation2(obj) {
+    var swordyAttackFrame = new EnemyAtkAnimation(obj);
 
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash1.png", 645);},800);
+    swordSwing.play();
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash2.png", 645); dmgReceived(obj)}, 900);
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash3.png", 645);},1000);
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash4.png", 645);},1100);
+    setTimeout(()=>{ctx2.clearRect(swordyAttackFrame.x -645, swordyAttackFrame.y, swordyAttackFrame.width, swordyAttackFrame.height)}, 1300);
+    setTimeout(()=>{reDrawGuard();},1400);
 }
 
+function canDevilFlamesLit(candevil) {
+    function getId(){
+        var flames = setInterval(()=>{flameFrames(candevil);}, 1000); 
+        return flames;
+    }
 
+    if (candevil.hp < 1) { 
+        intervalObject.clear(candevil.intervalID);
+    } else {
+       candevil.intervalID = getId();
+       intervalObject.intervals.add(candevil.intervalID);
+    }
+
+    function flameFrames(candevil) {
+        candevil.drawEnemy('images/enemies/candevil/CanDevil2.png');
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil3.png');},200);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil4.png');},400);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil5.png');},600);
+        setTimeout(()=>{candevil.drawEnemy(candevil.img);},800);
+    }
+}
+
+function canDevilFlamesExtinguished(candevil){
+    function getId(){
+        var movement = setInterval(()=>{movementFrames(candevil);}, 1200); 
+        return movement;
+    }
+
+    if (candevil.hp < 1) { 
+        intervalObject.clear(candevil.intervalID);
+    } else {
+       candevil.intervalID = getId();
+       intervalObject.intervals.add(candevil.intervalID);
+    }
+
+    function movementFrames(candevil) {
+        candevil.drawEnemy('images/enemies/candevil/CanDevilUnlit2.png');
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevilUnlit3.png');},200);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevilUnlit1.png');},800);
+    }
+}
 
 function canDevilAttackAnimation1() {
 
@@ -183,13 +245,18 @@ function canDevilAttackAnimation2() {
 
 
 function pharaohManHovering(pharaohMan){
-    //Need to clear interval with the right ID
     function getId(){
         var hover = setInterval(()=>{pharaohManFrames(pharaohMan);}, 1200); 
         return hover;
     }
-    getId();
   
+    if (pharaohMan.hp < 1) { 
+         intervalObject.clear(pharaohMan.intervalID);
+    } else {
+        pharaohMan.intervalID = getId();
+        intervalObject.intervals.add(pharaohMan.intervalID);
+    }
+
     function pharaohManFrames(pharaohMan){
       pharaohMan.drawEnemy('images/enemies/pharaohman/PharaohMan2.png');
       setTimeout(()=>{pharaohMan.drawEnemy('images/enemies/pharaohman/PharaohMan3.png');},200);
@@ -198,9 +265,6 @@ function pharaohManHovering(pharaohMan){
       setTimeout(()=>{pharaohMan.drawEnemy('images/enemies/pharaohman/PharaohMan2.png');},800);
       setTimeout(()=>{pharaohMan.drawEnemy(pharaohMan.img);},1000);
     };
-    
-    //make sure to fix pharaohMan
-    if (pharaohMan.hp < 1) { clearInterval(getId()); } 
   }
   
   function pharaohManTrap(obj) {

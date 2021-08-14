@@ -14,13 +14,19 @@ function sound(src) {
       this.sound.pause();
       this.sound.isItPlaying = false;
   }
+  // this.increaseVol = function() {
+  //   this.sound.volume += 0.2;
+  // }
 }
 
 const mainTheme = new sound("music/MMBN1 Theme Of Rockman Exe.mp3");
+//mainTheme.sound.volume = 0.5;
 
 const battleStart = new sound("music/goinbtl HQ.wav");
 
 const busterShot = new sound("music/BusterShot.wav");
+
+const swordSwing = new sound("music/SwordSwing.wav");
 
 const dmgDishedSound = new sound("music/Damage.wav");
 

@@ -2,6 +2,14 @@ let allRounds = firstSetOfRounds;
 var currentRound = allRounds[0];
 var currentMegaMan;
 var currentTargetIcon; //Which enemy you are targeting
+var intervalObject = {
+  intervals: new Set(),
+
+  clear(id) {
+    this.intervals.delete(id);
+    return clearInterval(id);
+  }
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   mainTheme.play();
@@ -40,32 +48,16 @@ function startGame(){
 
 //for the function dmgDished(round)
 function spliceFromRound(round, enemy){
-  if (enemy.hp <= 0) {
     currentTargetIcon.move(999);
     enemy.enemyAttackTimeOut(enemy); //for now, since both conditions were met on both functions, it gives the desired result; 
 
     //this ensures to stop the still animation 
-    switch (enemy.name) {
-      case "Swordy":
+    console.log("Enemy deleted: " + enemy.name);
+    enemy.animation();
 
-          break;
-
-      case "CanDevil":
-
-          break;
-
-      case "PharaohMan":
-          pharaohManHovering(enemy);
-          break;
-
-      default:
-          break;
-    }
-    
     round.splice(i, 1);
     enemyDeleted.play();
     roundVictory(round)
-  } 
 }
 
 function roundVictory(round) {
