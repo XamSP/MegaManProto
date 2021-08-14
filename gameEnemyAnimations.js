@@ -17,13 +17,31 @@ Enemy.prototype.animation = function() {
     }
 }
 
-EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x){
-    ctx2.clearRect(this.x - x +125, this.y, this.width, this.height);
+Enemy.prototype.drawEnemy = function(img){
+    ctx.clearRect(this.x, this.y, this.width, this.height);
+    var enemyImage = new Image();
+    enemyImage.src = img;
+    var that = this;
+    enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
+  };
+  
+  Enemy.prototype.drawEnemyRightOfMegaman = function(img){
+    //ctx.clearRect(this.x, this.y, this.width, this.height);
+    ctx3.clearRect(currentMegaMan.x + 40, currentMegaMan.y - 40, this.width, this.height);
+    var enemyImage = new Image();
+    enemyImage.src = img;
+    var that = this;
+    enemyImage.onload = ()=>ctx3.drawImage(enemyImage, currentMegaMan.x + 40, currentMegaMan.y - 40, that.width, that.height);
+  };
+
+EnemyAtkAnimation.prototype.drawTheAtkAnimation = function(img, x, xForClearingFrameBefore = 0, y = 0){
+    ctx2.clearRect(this.x - x + xForClearingFrameBefore, this.y + y, this.width, this.height);
     reDrawEnemyHp(currentRound);
     var enemyAtkImage = new Image();
     enemyAtkImage.src = img;
     var that = this;
-    enemyAtkImage.onload = ()=>ctx2.drawImage(enemyAtkImage, that.x - x, that.y, that.width, that.height);
+    console.log(that.x);
+    enemyAtkImage.onload = ()=>ctx2.drawImage(enemyAtkImage, that.x - x, that.y + y, that.width, that.height);
     reDrawGuard();
 };
 
@@ -65,7 +83,7 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y) {
 };
 
 function EnemyAtkAnimation(obj){
-    this.x = 720 +100;
+    this.x = obj.x + 100;
     this.y = obj.y;
     this.meme = "old meme";//just to test
     this.width = 60;
@@ -92,7 +110,7 @@ function reDrawEnemyHp(round) {
             enemyHpDisplay(round[0]);
             break;
     }
-  }
+}
 
 //Specific Enemy Animations
 
@@ -112,11 +130,11 @@ function mettaurAttackAnimation1(mettaur){
 function mettaurAttackAnimation2(obj){
     var mettaurAttackFrame = new EnemyAtkAnimation(obj);
 
-    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk1.png", 145); mettaurWave.play();},800);
-    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk2.png", 270); mettaurWave.stop(); mettaurWave.play();},1075);
-    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk3.png", 395); mettaurWave.stop(); mettaurWave.play();},1350);
-    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk4.png", 520); mettaurWave.stop(); mettaurWave.play();},1625);
-    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk5.png", 645); mettaurWave.stop(); mettaurWave.play(); dmgReceived(obj)},1900);
+    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk1.png", 145, 125); mettaurWave.play();},800);
+    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk2.png", 270, 125); mettaurWave.stop(); mettaurWave.play();},1075);
+    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk3.png", 395, 125); mettaurWave.stop(); mettaurWave.play();},1350);
+    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk4.png", 520, 125); mettaurWave.stop(); mettaurWave.play();},1625);
+    setTimeout(()=>{mettaurAttackFrame.drawTheAtkAnimation("images/enemies/mettaur/mettaurAtk5.png", 645, 125); mettaurWave.stop(); mettaurWave.play(); dmgReceived(obj)},1900);
     setTimeout(()=>{ctx2.clearRect(mettaurAttackFrame.x -645, mettaurAttackFrame.y, mettaurAttackFrame.width, mettaurAttackFrame.height)}, 2000);
     setTimeout(()=>{reDrawGuard();},2000);
 
@@ -150,13 +168,11 @@ function swordyStillSwordFrames(swordy) {
     if (swordy.hp < 1) { 
         intervalObject.clear(swordy.intervalID);
     } else {
-        console.log("entering");
         swordy.intervalID = getId();
         intervalObject.intervals.add(swordy.intervalID);
     }
 
     function swordyEminatingFrames(swordy) {
-        console.log("eminating")
       swordy.drawEnemy('images/enemies/swordy/swordyStill2.png');
       setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill3.png');},100);
       setTimeout(()=>{swordy.drawEnemy('images/enemies/swordy/swordyStill4.png');},200);
@@ -178,18 +194,17 @@ function swordyAttackAnimation1(swordy) {
     setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing3.png');},700);
     setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing4.png');},800);
     setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordySwing5.png');},900);
-    setTimeout(()=>{swordy.drawEnemy(swordy.img);},1000);
+    setTimeout(()=>{ctx3.clearRect(currentMegaMan.x + 40, currentMegaMan.y - 40, swordy.width, swordy.height);},1400);
 }
 
 function swordyAttackAnimation2(obj) {
     var swordyAttackFrame = new EnemyAtkAnimation(obj);
 
-    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash1.png", 645);},800);
-    swordSwing.play();
-    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash2.png", 645); dmgReceived(obj)}, 900);
-    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash3.png", 645);},1000);
-    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash4.png", 645);},1100);
-    setTimeout(()=>{ctx2.clearRect(swordyAttackFrame.x -645, swordyAttackFrame.y, swordyAttackFrame.width, swordyAttackFrame.height)}, 1300);
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash1.png", 675, 0, 50);},800); swordSwing.play();
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash2.png", 675, 0, 50); dmgReceived(obj)}, 900);
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash3.png", 675, 0, 50);},1000);
+    setTimeout(()=>{swordyAttackFrame.drawTheAtkAnimation("images/enemies/swordy/Slash4.png", 675, 0, 50);},1100);
+    setTimeout(()=>{ctx2.clearRect(swordyAttackFrame.x -675, swordyAttackFrame.y, swordyAttackFrame.width, swordyAttackFrame.height)}, 1300);
     setTimeout(()=>{reDrawGuard();},1400);
 }
 
@@ -197,7 +212,7 @@ function canDevilFlamesLit(candevil) {
     function getId(){
         var flames = setInterval(()=>{flameFrames(candevil);}, 1000); 
         return flames;
-    }
+    }w
 
     if (candevil.hp < 1) { 
         intervalObject.clear(candevil.intervalID);

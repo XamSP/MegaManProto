@@ -2,7 +2,7 @@
 //let pharaohMan = new PharaohMan();
 
 const roundMettaur1 = [new Mettaur(), new Mettaur(), new Mettaur()];
-const round2 = [new Mettaur(), new Swordy()];
+const round2 = [new Swordy(), new Mettaur()];
 const roundBossPharaohMan = [new PharaohMan(), new PharaohMan()];
 
 

@@ -9,6 +9,7 @@ function draw(round) {
     //Checking if Megaman is drawn/alive
     if(!currentMegaMan) {
       currentMegaMan = new Megaman();
+      currentMegaMan.drawMegaMan();
 
     } else {
       currentMegaMan.hp += 40; //Recover after battle

@@ -49,7 +49,7 @@ class Billy extends Enemy {
 
 class Swordy extends Enemy {
   constructor(name = "Swordy", hp = 60, dmg_output = 30, guard = false, attack_interval = 30, img = "images/enemies/swordy/swordyStill1.png", 
-              intervalSecs = 3000, timeOutSecs = 2000, x = 20, y = 20) {
+              intervalSecs = 3000, timeOutSecs = 2000, x = 40, y = 40) {
 
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y);
   }
@@ -79,22 +79,6 @@ class PharaohMan extends Enemy {
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
   }
 }
-
-Enemy.prototype.drawEnemy = function(img){
-  ctx.clearRect(this.x, this.y, this.width, this.height);
-  var enemyImage = new Image();
-  enemyImage.src = img;
-  var that = this;
-  enemyImage.onload = ()=>ctx.drawImage(enemyImage, that.x, that.y, that.width, that.height);
-};
-
-Enemy.prototype.drawEnemyRightOfMegaman = function(img){
-  ctx.clearRect(this.x, this.y, this.width, this.height);
-  var enemyImage = new Image();
-  enemyImage.src = img;
-  var that = this;
-  enemyImage.onload = ()=>ctx.drawImage(enemyImage, currentMegaMan.x + 120, currentMegaMan.y, that.width, that.height);
-};
 
 Enemy.prototype.enemyAttackInterval = function(){
   var that = this;

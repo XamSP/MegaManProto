@@ -16,10 +16,10 @@ function placeArmy(round) {
   
       case 2 : 
         round[0].x = 720;
-        round[0].y = 280;
+        round[0].y = 240;
         
         round[1].x = 720;
-        round[1].y = 340;
+        round[1].y = 380;
         round[1].intervalSecs = round[1].intervalSecs * 1.2;
         break;
   
