@@ -57,6 +57,7 @@ function updateHp() {
      } else {
         ctx2.clearRect(0,0,80,80);
         deleted.play();
+        megamanDeletedNotificationAnimation();
         currentMegaMan = null;
         ctx.clearRect(140,320,100,60);
     

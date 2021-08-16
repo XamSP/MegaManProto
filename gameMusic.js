@@ -42,12 +42,14 @@ const shielded = new sound("music/Shielded.wav");
 //louder
 const mettaurWave = new sound("music/MettWave3.wav");
 
+const flameSFX = new sound("music/flame2.wav");
+
 //trim and louder
 const targetSound = new sound("music/ScopeLock HQ.wav");
 
 const hurt = new sound("music/Hurt HQ.wav");
 
-const deleted = new sound("music/Deleted HQ.wav");
+const deleted = new sound("music/Deleted HQ2.wav");
 
 const enemyDeleted = new sound("music/explode HQ.ogg");
 

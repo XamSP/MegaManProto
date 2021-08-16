@@ -1,6 +1,7 @@
-var Megaman = function() {
+class Megaman {
+  constructor(hp = 100) {
     this.name = 'MegaMan.EXE';
-    this.hp = 10000;
+    this.hp = hp;
     this.gauge = 100;//% //later
     this.guard_cooldown = 100;//% //later
     this.atkCooldown = false;
@@ -11,9 +12,11 @@ var Megaman = function() {
     this.height = 60;
     this.img = "images/megaman/still/still1.png"; //change later :P
     this.guard = false;
-    this.status = function() {if (this.hp > 0) {return true;} else {return false;}
-    };
-  };
+    this.status = function() {
+        if (this.hp > 0) {return true;} else {return false;}
+    }
+  }    
+}
   
 //Guard
 function guarding() {

@@ -45,6 +45,7 @@ function startGame(){
   battleStart.play();
 
   console.log(currentRound);
+  battleStartAnimation();
   setTimeout(()=>{draw(currentRound);},1000);
 }
 //Start-up END
@@ -66,6 +67,7 @@ function spliceFromRound(round, enemy){
 function roundVictory(round) {
   if(currentRound.length <= 0){
     winAnimation();
+    ctx.clearRect(0, 0, theCanvas.width, theCanvas.height);
 
     //initializing next round
     setTimeout(()=>{nextRound(allRounds, round)}, 2000);
@@ -84,13 +86,15 @@ function nextRound(setOfRounds, round) {
   startGame();
 }
 
-var TargetIcon = function(round) {
-  this.x = round[0].x;
-  this.y = round[0].y;
-  this.width = round[0].width;
-  this.height = round[0].height;
-  this.img = "images/battlefield-misc/targetIcons/targetIcon.png";
-};
+class TargetIcon {
+  constructor(round) {
+    this.x = round[0].x;
+    this.y = round[0].y;
+    this.width = round[0].width;
+    this.height = round[0].height;
+    this.img = "images/battlefield-misc/targetIcons/targetIcon.png";
+  }
+}
 
 TargetIcon.prototype.drawTargetIcon = function() {
   var targetImage = new Image();

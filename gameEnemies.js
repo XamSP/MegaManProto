@@ -100,21 +100,23 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
         break;
 
       case "Billy":
-        //billyAttackAnimation();
+        //billyAttackAnimation1(obj);
+        //that.drawEnemyAtkAnimation(that.name, that.x, that.y);
         break;
 
       case "Bunny":
-        //bunnyAttackAnimation();
+        //bunnyAttackAnimation1(obj);
+        //that.drawEnemyAtkAnimation(that.name, that.x, that.y);
         break;
 
       case "Swordy":
         swordyAttackAnimation1(obj);
         that.drawEnemyAtkAnimation(that.name, that.x, that.y);
-
         break;
 
       case "CanDevil":
-        //canDevilAttackAnimation();
+        canDevilAttackAnimation1(obj);
+        that.drawEnemyAtkAnimation(that.name, that.x, that.y);
         break;
 
       case "PharaohMan":
@@ -125,7 +127,6 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
         console.log("Animation not found!");
         break;
     }
-
   }
   
   if (this.hp > 0){
@@ -135,7 +136,6 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
     ctx.clearRect(this.x, this.y, this.width, this.height);
     clearInterval(interval);
   }
-
 };
 //Mettaur.prototype.enemyAttackTimeOut
 

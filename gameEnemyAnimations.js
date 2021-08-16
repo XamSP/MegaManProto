@@ -55,11 +55,11 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y) {
           break;
   
         case "Billy":
-          //billyAttackAnimation();
+          //billyAttackAnimation(obj);
           break;
   
         case "Bunny":
-          //bunnyAttackAnimation2();
+          //bunnyAttackAnimation2(obj);
           break;
   
         case "Swordy":
@@ -67,7 +67,7 @@ Enemy.prototype.drawEnemyAtkAnimation = function(name, x, y) {
           break;
   
         case "CanDevil":
-          //canDevilAttackAnimation2();
+          canDevilAttackAnimation2(obj);
           break;
   
         case "PharaohMan":
@@ -113,7 +113,6 @@ function reDrawEnemyHp(round) {
 }
 
 //Specific Enemy Animations
-
 function mettaurAttackAnimation1(mettaur){
     mettaur.drawEnemy('images/enemies/mettaur/mettaur1.png');
     setTimeout(()=>{mettaur.drawEnemy('images/enemies/mettaur/mettaur2.png');},100);
@@ -210,9 +209,9 @@ function swordyAttackAnimation2(obj) {
 
 function canDevilFlamesLit(candevil) {
     function getId(){
-        var flames = setInterval(()=>{flameFrames(candevil);}, 1000); 
+        var flames = setInterval(()=>{flameFrames(candevil);}, 700); 
         return flames;
-    }w
+    }
 
     if (candevil.hp < 1) { 
         intervalObject.clear(candevil.intervalID);
@@ -223,10 +222,12 @@ function canDevilFlamesLit(candevil) {
 
     function flameFrames(candevil) {
         candevil.drawEnemy('images/enemies/candevil/CanDevil2.png');
-        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil3.png');},200);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil3.png');},100);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil4.png');},200);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil5.png');},300);
         setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil4.png');},400);
-        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil5.png');},600);
-        setTimeout(()=>{candevil.drawEnemy(candevil.img);},800);
+        setTimeout(()=>{candevil.drawEnemy('images/enemies/candevil/CanDevil3.png');},500);
+        setTimeout(()=>{candevil.drawEnemy(candevil.img);},600);
     }
 }
 
@@ -251,11 +252,37 @@ function canDevilFlamesExtinguished(candevil){
 }
 
 function canDevilAttackAnimation1() {
-
+    //might add animation later
 }
 
-function canDevilAttackAnimation2() {
+function canDevilAttackAnimation2(obj) {
+    var flameAttackFrame = new EnemyAtkAnimation(obj);
+    console.log("candevil animation2");
 
+    function shiftFirePhases(x, subtractX) {
+        console.log("shiftFirePhases");
+        flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame1.png", x, subtractX); flameSFX.play();
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame2.png", x, subtractX);},50);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame3.png", x, subtractX);},100);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame4.png", x, subtractX);},150);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame5.png", x, subtractX);},200);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame6.png", x, subtractX);},250);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame7.png", x, subtractX);},300);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame8.png", x, subtractX);},350);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame9.png", x, subtractX);},400);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame10.png", x, subtractX);},450);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame11.png", x, subtractX);},500);
+        setTimeout(()=>{flameAttackFrame.drawTheAtkAnimation("images/enemies/candevil/flame12.png", x, subtractX);},550);
+        setTimeout(()=>{ctx2.clearRect(flameAttackFrame.x - x, flameAttackFrame.y, flameAttackFrame.width, flameAttackFrame.height)}, 600);
+    }
+
+    setTimeout(()=>{shiftFirePhases(145, 0);},650);
+    setTimeout(()=>{shiftFirePhases(270, 0);},1300);
+    setTimeout(()=>{shiftFirePhases(395, 0);},1950);
+    setTimeout(()=>{shiftFirePhases(520, 0);},2600);
+    setTimeout(()=>{shiftFirePhases(645, 0); dmgReceived(obj)},3250);
+    setTimeout(()=>{ctx2.clearRect(flameAttackFrame.x -645, flameAttackFrame.y, flameAttackFrame.width, flameAttackFrame.height)}, 3900);
+    setTimeout(()=>{reDrawGuard();},3900);
 }
 
 

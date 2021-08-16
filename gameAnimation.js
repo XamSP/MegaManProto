@@ -18,6 +18,28 @@ Megaman.prototype.drawMegaMan2 = function(img) {
   megaManImage.onload = ()=>ctx4.drawImage(megaManImage, that.x, that.y, that.width, that.height);
 };
 
+class BattleNotificationFrame {
+  constructor() {
+    this.x = 350;
+    this.y = 300;
+    this.width = 50;
+    this.height = 10;
+    this.img;
+    this.drawAnimation = function(img) {
+      ctx.clearRect(this.x,this.y,this.width * 4,this.height * 4);
+      if(!img)
+        img = this.img;
+      let winImage = new Image();
+      winImage.src = img;
+      let that = this;
+      winImage.onload = ()=>ctx.drawImage(winImage, that.x, that.y, that.width * 4, that.height * 4);
+    }
+    this.eraseAnimation = function() {
+      ctx.clearRect(this.x,this.y,this.width * 4, this.height * 4);
+    }
+  }
+}
+
 function megamanDamagedAnimation() {
   currentMegaMan.drawMegaMan('images/megaman/damaged/megamanDmg3.png', -4); 
   currentMegaMan.atkCooldown = true;
@@ -77,51 +99,55 @@ function swordAnimation() {
   setTimeout(()=>{currentRound.map(x=> enemyHpDisplay(x));currentMegaMan.drawMegaMan(); notGuarding();},600);
 }
 
-function WinFrame() {
-  this.x = 350;
-  this.y = 300;
-  this.width = 50;
-  this.height = 10;
-  this.img = "images/battleNotification/win-animation/Win7.png";
-  this.drawWinAnimation = function(img) {
-    ctx.clearRect(this.x,this.y,this.width * 4,this.height * 4);
-    if(!img)
-      img = this.img;
-    let winImage = new Image();
-    winImage.src = img;
-    let that = this;
-    winImage.onload = ()=>ctx.drawImage(winImage, that.x, that.y, that.width * 4, that.height * 4);
-  }
-  this.eraseWinAnimation = function() {
-    ctx.clearRect(this.x,this.y,this.width * 4, this.height * 4);
-  }
+function winAnimation() {
+  const win = new BattleNotificationFrame();
+  
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win1.png")}, 100);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win2.png")}, 200);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win3.png")}, 300);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win4.png")}, 400);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win5.png")}, 500);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win6.png")}, 600);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win7.png")}, 700);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win8.png")}, 800);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win7.png")}, 900);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win6.png")}, 1000);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win5.png")}, 1100);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win4.png")}, 1200);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win3.png")}, 1300);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win2.png")}, 1400);
+  setTimeout(()=>{win.drawAnimation("images/battleNotification/win-animation/Win1.png")}, 1500);
+  setTimeout(()=>{win.eraseAnimation()}, 1600);
 }
 
-function winAnimation() {
-  const win = new WinFrame();
-  const winPics = [
-  "images/battleNotification/win-animation/Win1.png", "images/battleNotification/win-animation/Win2.png", 
-  "images/battleNotification/win-animation/Win3.png", "images/battleNotification/win-animation/Win4.png", 
-  "images/battleNotification/win-animation/Win5.png", "images/battleNotification/win-animation/Win6.png", 
-  "images/battleNotification/win-animation/Win7.png","images/battleNotification/win-animation/Win8.png"
-  ];
-  
-    setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 1 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 2 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 3 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[3])}, 4 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[4])}, 5 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 6 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 7 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[7])}, 8 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 9 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 10 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[4])}, 11 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[3])}, 12 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 13 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 14 * 100);
-    setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 15 * 100);
-    setTimeout(()=>{win.eraseWinAnimation()}, 16 * 100);
+function battleStartAnimation() {
+  const battleStart = new BattleNotificationFrame();
+
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle1.png')}, 100);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle2.png')}, 200);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle3.png')}, 300);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle4.png')}, 400);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle5.png')}, 500);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle6.png')}, 800);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle7.png')}, 900);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle6.png')}, 1000);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle5.png')}, 1100);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle4.png')}, 1200);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle3.png')}, 1300);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle2.png')}, 1400);
+  setTimeout(()=>{battleStart.drawAnimation('images/battleNotification/battleStart-animation/battle1.png')}, 1500);
+  setTimeout(()=>{battleStart.eraseAnimation()}, 1600);
+}
+
+function megamanDeletedNotificationAnimation() {
+  const megamanDelNotification = new BattleNotificationFrame();
+
+  setTimeout(()=>{megamanDelNotification.drawAnimation('images/battleNotification/megamanDeleted-animation/mmdeleted1.png')}, 100);
+  setTimeout(()=>{megamanDelNotification.drawAnimation('images/battleNotification/megamanDeleted-animation/mmdeleted2.png')}, 200);
+  setTimeout(()=>{megamanDelNotification.drawAnimation('images/battleNotification/megamanDeleted-animation/mmdeleted3.png')}, 300);
+  setTimeout(()=>{megamanDelNotification.drawAnimation('images/battleNotification/megamanDeleted-animation/mmdeleted2.png')}, 800);
+  setTimeout(()=>{megamanDelNotification.drawAnimation('images/battleNotification/megamanDeleted-animation/mmdeleted1.png')}, 900);
+  setTimeout(()=>{megamanDelNotification.eraseAnimation()}, 1000);
 }
 
 function reDrawGuard(){
