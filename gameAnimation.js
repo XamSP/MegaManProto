@@ -18,13 +18,21 @@ Megaman.prototype.drawMegaMan2 = function(img) {
   megaManImage.onload = ()=>ctx4.drawImage(megaManImage, that.x, that.y, that.width, that.height);
 };
 
+function megamanDamagedAnimation() {
+  currentMegaMan.drawMegaMan('images/megaman/damaged/megamanDmg3.png', -4); 
+  currentMegaMan.atkCooldown = true;
+  setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/damaged/megamanDmg2.png'), -4;}, 200);
+  setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/damaged/megamanDmg1.png'), -4;}, 300);
+  setTimeout(()=>{currentMegaMan.drawMegaMan(); currentMegaMan.atkCooldown=false;},400);
+}
+
 function busterAnimation() {
   currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster1.png');
-        setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster2.png');},50);
-        setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster3.png');},100);
-        setTimeout(()=>{currentMegaMan.drawMegaMan(); currentMegaMan.atkCooldown=false;},150);
-        dmgDished(currentRound, 3);
-        busterShot.play();
+  setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster2.png');},50);
+  setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster3.png');},100);
+  setTimeout(()=>{currentMegaMan.drawMegaMan(); currentMegaMan.atkCooldown=false;},150);
+  dmgDished(currentRound, 3);
+  busterShot.play();
 }
 
 function cannonAnimation() {
@@ -72,11 +80,11 @@ function swordAnimation() {
 function WinFrame() {
   this.x = 350;
   this.y = 300;
-  this.width = 200;
-  this.height = 60;
-  this.img = "images/win-animation/Win7.png";
+  this.width = 50;
+  this.height = 10;
+  this.img = "images/battleNotification/win-animation/Win7.png";
   this.drawWinAnimation = function(img) {
-    ctx.clearRect(this.x,this.y,this.width,this.height);
+    ctx.clearRect(this.x,this.y,this.width * 4,this.height * 4);
     if(!img)
       img = this.img;
     let winImage = new Image();
@@ -84,14 +92,20 @@ function WinFrame() {
     let that = this;
     winImage.onload = ()=>ctx.drawImage(winImage, that.x, that.y, that.width * 4, that.height * 4);
   }
+  this.eraseWinAnimation = function() {
+    ctx.clearRect(this.x,this.y,this.width * 4, this.height * 4);
+  }
 }
 
 function winAnimation() {
   const win = new WinFrame();
-  const winPics = ["images/win-animation/Win1.png","images/win-animation/Win2.png", 
-  "images/win-animation/Win3.png", "images/win-animation/Win4.png", "images/win-animation/Win5.png",
-  "images/win-animation/Win6.png", "images/win-animation/Win7.png","images/win-animation/Win8.png"
+  const winPics = [
+  "images/battleNotification/win-animation/Win1.png", "images/battleNotification/win-animation/Win2.png", 
+  "images/battleNotification/win-animation/Win3.png", "images/battleNotification/win-animation/Win4.png", 
+  "images/battleNotification/win-animation/Win5.png", "images/battleNotification/win-animation/Win6.png", 
+  "images/battleNotification/win-animation/Win7.png","images/battleNotification/win-animation/Win8.png"
   ];
+  
     setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 1 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 2 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 3 * 100);
@@ -100,7 +114,14 @@ function winAnimation() {
     setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 6 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 7 * 100);
     setTimeout(()=>{win.drawWinAnimation(winPics[7])}, 8 * 100);
-    setTimeout(()=>ctx.clearRect(350,300,200,60), 9 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[6])}, 9 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[5])}, 10 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[4])}, 11 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[3])}, 12 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[2])}, 13 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[1])}, 14 * 100);
+    setTimeout(()=>{win.drawWinAnimation(winPics[0])}, 15 * 100);
+    setTimeout(()=>{win.eraseWinAnimation()}, 16 * 100);
 }
 
 function reDrawGuard(){

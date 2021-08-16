@@ -28,6 +28,9 @@ var ctx3 = threeCanvas.getContext("2d");
 var fourCanvas = document.getElementById("fourCanvas");
 var ctx4 = fourCanvas.getContext("2d");
 
+var fiveCanvas = document.getElementById("fiveCanvas");
+var ctx5 = fourCanvas.getContext("2d");
+
 // GAME SETUP & CONTROLS
 
 //Start-up
@@ -62,9 +65,7 @@ function spliceFromRound(round, enemy){
 
 function roundVictory(round) {
   if(currentRound.length <= 0){
-    let win = document.getElementsByClassName("winAnimation")[0];
-    setTimeout(()=>{win.style.display = "block"}, 200)
-    setTimeout(()=>{win.style.display = "none"}, 1600)
+    winAnimation();
 
     //initializing next round
     setTimeout(()=>{nextRound(allRounds, round)}, 2000);
@@ -88,7 +89,7 @@ var TargetIcon = function(round) {
   this.y = round[0].y;
   this.width = round[0].width;
   this.height = round[0].height;
-  this.img = "images/battlefield-misc/targetIcon.png";
+  this.img = "images/battlefield-misc/targetIcons/targetIcon.png";
 };
 
 TargetIcon.prototype.drawTargetIcon = function() {

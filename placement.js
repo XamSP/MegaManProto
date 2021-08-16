@@ -36,7 +36,13 @@ function placeArmy(round) {
 
 function megabar() { //Just Megaman's mugshot
   var bar = new Image();
-  bar.src = "images/background/mmface.png";
+  if(currentMegaMan.hp < 31) {
+    bar.src = "images/battlefield-misc/megamanStatus/mmfaceWeak.png";
+
+  } else {
+    bar.src = "images/battlefield-misc/megamanStatus/mmface.png";
+  }
+  
   bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
 }
 

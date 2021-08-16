@@ -52,6 +52,7 @@ function updateHp() {
         ctx2.font = "30px Arial";
         ctx2.fillStyle = 'white';
         ctx2.fillText(currentMegaMan.hp, 30, 30);
+        megabar();
 
      } else {
         ctx2.clearRect(0,0,80,80);
@@ -98,6 +99,7 @@ function dmgReceived(enemy) {
       //Here he is taking damage
       currentMegaMan.hp -= enemy.dmg_output; 
       updateHp();
+      megamanDamagedAnimation();
       hurt.play(); //sound
     }
   }
