@@ -27,6 +27,7 @@ function draw(round) {
     guardGauge(currentMegaMan);
     backgroundMusic(round);
     megabar(); //Megaman's Mugshot
+    keysDisplay();
     //displayActions();
   }
 
@@ -49,7 +50,7 @@ function updateHp() {
     function, probably need to update this when I add healing */
      if (currentMegaMan.hp > 0) {
         ctx2.clearRect(0 ,0 ,80, 80);
-        ctx2.font = "30px Arial";
+        ctx2.font = "30px MMBNThick";
         ctx2.fillStyle = 'white';
         ctx2.fillText(currentMegaMan.hp, 30, 30);
         megabar();
@@ -86,9 +87,9 @@ function dmgDished(round, dmg) {
 function updateGuardCooldown(){
     //the guard that megaman uses to shield atks from enemies
     ctx2.clearRect(0 ,40 ,110, 80);
-    ctx2.font = "30px Arial"; 
+    ctx2.font = "30px MMBNThick"; 
     ctx2.fillStyle = 'white';
-    ctx2.fillText(currentMegaMan.guard_cooldown + "%", 30, 70);
+    ctx2.fillText(currentMegaMan.guard_cooldown + " '", 30, 70);
 }
 
 function dmgReceived(enemy) {

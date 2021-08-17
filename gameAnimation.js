@@ -53,7 +53,7 @@ function busterAnimation() {
   setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster2.png');},50);
   setTimeout(()=>{currentMegaMan.drawMegaMan('images/megaman/megaBuster/megaBuster3.png');},100);
   setTimeout(()=>{currentMegaMan.drawMegaMan(); currentMegaMan.atkCooldown=false;},150);
-  dmgDished(currentRound, 3);
+  dmgDished(currentRound, 1);
   busterShot.play();
 }
 

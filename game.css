@@ -89,6 +89,15 @@ img.winAnimation {
   z-index: 3;
 }
 
+#fiveCanvas{
+  margin:0 auto;
+  width: 70%;
+  position: absolute;
+  /* left: 0;
+  top: 0; */
+  z-index: 4;
+}
+
 #mainMenu {
  /* background-color: green;  */
   background-image:url("images/background/menu.png");

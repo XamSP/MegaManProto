@@ -7,6 +7,9 @@
   <link rel="shorcut icon" type="image/ico" href="favicon.ico">
   <link rel="shorcut icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
   <link rel="shorcut icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <style>
+    @font-face { font-family: MMBNThick; src: url('mmbnthick_regular.ttf'); font-size: 6.2em;} 
+  </style>
   <!-- src=".\images\favicon\favicon.ico" -->
   <!-- <link rel="icon" type="image/ico" href="favicon.ico">
   <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32" />
@@ -18,7 +21,7 @@
 <body>
   
     <div id="mainMenu" class="">
-      <button id="startGame" onclick="startGame()">Start Game</button>
+      <button id="startGame" onclick="startGame()" style="font-family: MMBNThick;">Start Game</button>
     </div>
 
     <div id="gameover">
@@ -50,5 +53,8 @@
   <script type="text/javascript" src="gameAnimation.js"></script>
   <script type="text/javascript" src="gameEnemyAnimations.js"></script>
   <script type="text/javascript" src="gameMusic.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 </body>
 </html>

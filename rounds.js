@@ -2,11 +2,11 @@
 //let pharaohMan = new PharaohMan();
 
 const roundMettaur1 = [new Mettaur(), new Mettaur(), new Mettaur()];
-const round2 = [new CanDevil()];
+const round2 = [new CanDevil(), new Swordy()];
 const round1 = [new CanDevil(), new Mettaur(), new Mettaur()];
 const roundBossPharaohMan = [new PharaohMan()];
 
 
 //Set of rounds
-const firstSetOfRounds = [round1, roundBossPharaohMan, round2];
+const firstSetOfRounds = [roundMettaur1, round2, roundBossPharaohMan];
 

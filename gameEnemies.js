@@ -73,7 +73,7 @@ class Lavagon extends Enemy {
 
 //Bosses
 class PharaohMan extends Enemy {
-  constructor (name = "PharaohMan", hp = 20, dmg_output = 10, guard = false, attack_interval = 0, img = "images/enemies/pharaohman/PharaohMan1.png", 
+  constructor (name = "PharaohMan", hp = 200, dmg_output = 10, guard = false, attack_interval = 0, img = "images/enemies/pharaohman/PharaohMan1.png", 
               intervalSecs = 2000, timeOutSecs = 1500, x = 40, y = 40) {
                 
     super(name, hp, dmg_output, guard, attack_interval,img, intervalSecs, timeOutSecs, x, y)
@@ -143,26 +143,26 @@ function enemyHpDisplay(enemy){
   //lots of playing to show their hp right
   if(enemy.hp >= 1 && enemy.width === 60) {
     ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -20, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
+    ctx2.font = "30px MMBNThick";
     ctx2.fillStyle = 'white';
     ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
   
   } else if (enemy.hp >= 100){
     ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
+    ctx2.font = "30px MMBNThick";
     ctx2.fillStyle = 'white';
     ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
   
   }else if (enemy.hp >= 1 && enemy.hp <=99 && enemy.width === 60){
     ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
+    ctx2.font = "30px MMBNThick";
     ctx2.fillStyle = 'white';
     ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 4), enemy.y + enemy.height+10);
   
   
   }else if (enemy.hp >= 1 && enemy.hp <=99){
     ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -30, enemy.width, enemy.height);
-    ctx2.font = "30px Arial";
+    ctx2.font = "30px MMBNThick";
     ctx2.fillStyle = 'white';
     ctx2.fillText(enemy.hp, enemy.x + (enemy.width / 3), enemy.y + enemy.height+10);
   

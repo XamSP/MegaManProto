@@ -46,6 +46,26 @@ function megabar() { //Just Megaman's mugshot
   bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
 }
 
+function keysDisplay() {
+  console.log("here");
+
+  ctx2.font = "30px MMBNThick"; 
+  ctx2.fillStyle = 'white';
+  
+
+  var keyA = new Image(); var keyW = new Image();
+  var keyD = new Image(); var keyS = new Image();
+
+  keyA.src = 'images/chips/chips sprite/withoutRow/Guard.png'; keyW.src = 'images/chips/chips sprite/withoutRow/Spreader.png';
+  keyD.src = 'images/chips/chips sprite/withoutRow/Cannon.png'; keyS.src = 'images/chips/chips sprite/withoutRow/Sword.png';
+
+  keyA.onload = () => ctx.drawImage(keyA, 30, 450,70,50);  ctx2.fillText("A", 30, 470);
+  keyW.onload = () => ctx.drawImage(keyW, 100, 400,70,50); ctx2.fillText("W", 100, 420);
+  keyD.onload = () => ctx.drawImage(keyD, 170, 450,70,50); ctx2.fillText("D", 170, 470);
+  keyS.onload = () => ctx.drawImage(keyS, 100, 500,70,50); ctx2.fillText("S", 100, 520);
+
+}
+
 function startEnemyHpDisplay(round) {
   round.map(enemy => enemyHpDisplay(enemy));
 }

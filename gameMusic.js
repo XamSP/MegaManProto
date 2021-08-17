@@ -34,6 +34,22 @@ const naviBattleBGM = new sound("music/MMBN1Navi Battle.mp3");
 
 const virusBustingBGM = new sound("music/MMBN2 Virus Busting.mp3");
 
+const chargingBuster = new sound("music/BusterCharging HQ.wav");
+
+const chargedBuster = new sound("music/BusterCharged HQ.wav");
+
+const invisNoise = new sound("music/TurnInvisible HQ.wav");
+
+const attackInFullSynchro = new sound("music/UseChipWhileInFullSynchro HQ.wav");
+
+const recoverHPSound = new sound("music/Recover HQ.wav");
+
+const pauseSound = new sound("music/Pause HQ.wav");
+
+const newGameSound = new sound("music/NewGame HQ.wav");
+
+const peilHPSound = new sound("music/RedHP HQ.wav");
+
 //trim
 const shieldDrawedSound = new sound("music/ShieldNCP HQ.wav");
 
