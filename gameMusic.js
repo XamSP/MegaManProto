@@ -55,6 +55,8 @@ const shieldDrawedSound = new sound("music/ShieldNCP HQ.wav");
 
 const shielded = new sound("music/Shielded.wav");
 
+const winJingle = new sound("music/enemy_deleted_cutout.wav");
+
 //louder
 const mettaurWave = new sound("music/MettWave3.wav");
 

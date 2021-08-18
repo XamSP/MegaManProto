@@ -34,6 +34,16 @@ function placeArmy(round) {
     }
   }
 
+function HPnMBBar() {
+  var HPBar = new Image();
+  HPBar.src = "images/battlefield-misc/HPBar.png";
+  HPBar.onload = ()=>ctx.drawImage(HPBar,15,5,80,31);
+
+  var MBBar = new Image();
+  MBBar.src = "images/battlefield-misc/MBBar.png";
+  MBBar.onload = ()=>ctx.drawImage(MBBar,15,45,80,31);
+}
+
 function megabar() { //Just Megaman's mugshot
   var bar = new Image();
   if(currentMegaMan.hp < 31) {
@@ -43,12 +53,21 @@ function megabar() { //Just Megaman's mugshot
     bar.src = "images/battlefield-misc/megamanStatus/mmface.png";
   }
 
-  bar.onload = ()=>ctx.drawImage(bar,30,80,80,30);
+  bar.onload = ()=>ctx.drawImage(bar,15,84,80,30);
+}
+
+function enemyNameDisplay(enemyArmy) {
+  ctx.font = "30px MMBNThick"; 
+  ctx.fillStyle = 'white';
+
+  for (i = 0; i < enemyArmy.length; i++) {
+    console.log("h");
+    //Maximum 10 characters
+    ctx.fillText(enemyArmy[i].name, 820, (i + 1) * 30);
+  }
 }
 
 function keysDisplay() {
-  console.log("here");
-
   ctx2.font = "30px MMBNThick"; 
   ctx2.fillStyle = 'white';
   

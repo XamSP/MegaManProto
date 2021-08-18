@@ -58,7 +58,7 @@ function buster() {
   }
 }
 function sword(){
-      if (currentMegaMan.guard_cooldown >= 30 && currentMegaMan.guard === false) {
+      if (!currentMegaMan.atkCooldown && currentMegaMan.guard_cooldown >= 30 && currentMegaMan.guard === false) {
           currentMegaMan.guard_cooldown -= 30;
           currentMegaMan.guard = true;
           

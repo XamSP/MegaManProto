@@ -8,5 +8,5 @@ const roundBossPharaohMan = [new PharaohMan()];
 
 
 //Set of rounds
-const firstSetOfRounds = [roundMettaur1, round2, roundBossPharaohMan];
+const firstSetOfRounds = [round2, roundBossPharaohMan];
 

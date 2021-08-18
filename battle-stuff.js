@@ -22,12 +22,16 @@ function draw(round) {
     currentTargetIcon = new TargetIcon(round);
     
     //Drawing and music
+    fixedMegamanPosition = {x: currentMegaMan.x, y: currentMegaMan.y};
+    battleStart.play();
     updateHp();
     startEnemyHpDisplay(round);
     guardGauge(currentMegaMan);
     backgroundMusic(round);
+    HPnMBBar();
     megabar(); //Megaman's Mugshot
     keysDisplay();
+    enemyNameDisplay(round);
     //displayActions();
   }
 

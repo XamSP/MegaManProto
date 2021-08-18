@@ -1,6 +1,7 @@
 let allRounds = firstSetOfRounds;
 var currentRound = allRounds[0];
 var currentMegaMan;
+var fixedMegamanPosition;
 var currentTargetIcon; //Which enemy you are targeting
 var intervalObject = {
   intervals: new Set(),
@@ -67,6 +68,8 @@ function spliceFromRound(round, enemy){
 function roundVictory(round) {
   if(currentRound.length <= 0){
     winAnimation();
+    virusBustingBGM.stop()
+    winJingle.play();
     ctx.clearRect(0, 0, theCanvas.width, theCanvas.height);
 
     //initializing next round
