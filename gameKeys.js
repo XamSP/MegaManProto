@@ -6,31 +6,6 @@ document.onkeyup = function(e){
     currentTargetIcon.move(key);
 };
 
-TargetIcon.prototype.move = function(number) {
-
-  var that = this;
-  switch(number){
-    case 38: //the key ' ^ '
-      targetUp(currentRound);
-      drawTargetStuff(currentRound, that);
-      break;
-
-      //Testing to see if I can ignore the erasing and drawing if the army.length = 1
-    case 40: //the key ' \/ '
-      targetDown(currentRound);
-      drawTargetStuff(currentRound, that);
-      break;
-
-    case 999:
-      autoTargetDown(currentRound);
-      drawTargetStuff(currentRound, that);
-      break;  
-
-    default:
-      break;
-  }
-}
-
 function action(key) {
     //the "WASD and space button"
     switch(key) {
@@ -58,4 +33,32 @@ function action(key) {
       default:
         break;
     }
+}
+
+function actionToTarget(number, obj) {
+  switch(number){
+    case 38: //the key ' ^ '
+      targetUp(currentRound);
+      drawTargetStuff(currentRound, obj);
+      break;
+
+      //Testing to see if I can ignore the erasing and drawing if the army.length = 1
+    case 40: //the key ' \/ '
+      targetDown(currentRound);
+      drawTargetStuff(currentRound, obj);
+      break;
+
+    case 999:
+      if(currentRound.length > 1) {
+        autoTargetDown(currentRound);
+        drawTargetStuff(currentRound, obj);
+
+      } else {
+        eraseTargetStuff(obj);
+      }
+      break;  
+
+    default:
+      break;
+  }
 }

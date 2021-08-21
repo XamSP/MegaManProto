@@ -1,3 +1,25 @@
+class TargetIcon {
+  constructor(round) {
+    this.x = round[0].x;
+    this.y = round[0].y;
+    this.width = round[0].width;
+    this.height = round[0].height;
+    this.img = "images/battlefield-misc/targetIcons/targetIcon.png";
+  }
+}
+
+TargetIcon.prototype.drawTargetIcon = function() {
+  var targetImage = new Image();
+  targetImage.src = this.img;
+  var that = this;
+  targetImage.onload = ()=>ctx3.drawImage(targetImage, that.x, that.y, that.width, that.height);
+
+};  
+
+TargetIcon.prototype.move = function(number) {
+  actionToTarget(number, this);  
+}
+
 function autoTarget(round){
     var army = round;
     targetSound.play();
@@ -95,4 +117,8 @@ function drawTargetStuff(round, that){
     currentTargetIcon.height = cordinates.height;
     currentTargetIcon.drawTargetIcon(); 
   }
+}
+
+function eraseTargetStuff(icon) {
+  ctx3.clearRect(icon.x, icon.y, icon.width, icon.height);
 }

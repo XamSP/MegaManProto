@@ -103,6 +103,3 @@ function backgroundMusic(setOfRounds, round) {
     };
   }
 }
-
-//Need to find the win jingle
-const winTune = new sound("") 
