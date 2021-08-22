@@ -34,13 +34,15 @@ var fiveCanvas = document.getElementById("fiveCanvas");
 var ctx5 = fourCanvas.getContext("2d");
 
 //HTML Menu Elements 
-var menuBGElement= document.getElementById("mainMenuBG");
-var menuElement = document.getElementById("mainMenu");
-var gameBoard = document.getElementById("bg"); 
-var gameMenuElement = document.getElementById("gameMenu");
-var chipFolderMenuElement = document.getElementById("chipFolderMenu");
-var settingsMenuElement = document.getElementById("settingsMenu");
-var gameOverElement = document.getElementById("gameover"); 
+let menuBGElement= document.getElementById("mainMenuBG");
+let menuElement = document.getElementById("mainMenu");
+let gameBoard = document.getElementById("bg"); 
+let gameMenuElement = document.getElementById("gameMenu");
+let chipFolderMenuElement = document.getElementById("chipFolderMenu");
+let settingsMenuElement = document.getElementById("settingsMenu");
+let gameOverElement = document.getElementById("gameover"); 
+let creditsElement = document.getElementById("credits");
+let volumeMasterElement = document.getElementById("volumeMaster");
 
 gameMenuElement.style.display = "none"; //FIXME once I added the difficulties
 chipFolderMenuElement.style.display = "none";
@@ -51,10 +53,7 @@ gameOverElement.style.display = "none";
 
 //Menus
 function mainMenu() {
-  gameMenuElement.style.display = "none"; //FIXME once I added the difficulties
-  chipFolderMenuElement.style.display = "none";
-  settingsMenuElement.style.display = "none";
-  gameOverElement.style.display = "none";
+  blockAllElements();
   menuElement.style.display = "block";
 }
 
@@ -75,10 +74,7 @@ function startGame(){
 }
 
 function difficultyMenu(){ 
-  chipFolderMenuElement.style.display = "none";
-  settingsMenuElement.style.display = "none";
-  gameOverElement.style.display = "none";
-  menuElement.style.display = "none";
+  blockAllElements();
   gameMenuElement.style.display = "block";
 }
 
@@ -91,6 +87,8 @@ function startRounds(difficulty) {
       break;
     
     case 1:
+      allRounds = standardSetOfRounds.slice(0);
+      currentRound = allRounds[0];
       startGame();
       break;
 
@@ -105,6 +103,8 @@ function startRounds(difficulty) {
       break;
 
     case 4:
+      allRounds = testBossRound.splice(0);
+      currentRound = allRounds[0];
       startGame();
       break;
 
@@ -113,17 +113,25 @@ function startRounds(difficulty) {
   }
 }
 
-function x() {}
+function x() {/* Place Holder */}
 
 function folderMenu() {}
 
 function settingsMenu() {
-  menuElement.style.display = "none";
-  gameMenuElement.style.display = "none"; //FIXME once I added the difficulties
-  chipFolderMenuElement.style.display = "none"
-  gameOverElement.style.display = "none"; //FIXME once it works
-  gameBoard.style.display = "none";
+  blockAllElements();
   settingsMenuElement.style.display = "block";
+}
+
+function volumeMaster() {
+  blockAllElements();
+  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menu.png')";
+  volumeMasterElement.style.display = "block";
+}
+
+function credits(){
+  blockAllElements();
+  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menu.png')";
+  creditsElement.style.display = "block";
 }
 
 function backPage(int) {
@@ -137,7 +145,10 @@ function backPage(int) {
       break;
 
     case 2:
-      
+      menuBGElement.style.backgroundImage = "url('images/background/menu.png')";
+
+    case 3:
+      settingsMenu();
       break;
 
     default:
@@ -148,6 +159,22 @@ function backPage(int) {
 function gameOverMenu() {}
 
 function backToMenu() {}
+
+function blockAllElements(blockBGImage = false) {
+  if (blockBGImage) {
+    menuBGElement.style.display = "none";
+  }
+
+  menuElement.style.display = "none";
+  gameMenuElement.style.display = "none"; 
+  chipFolderMenuElement.style.display = "none"
+  gameOverElement.style.display = "none"; 
+  gameBoard.style.display = "none";
+  settingsMenuElement.style.display = "none";
+  creditsElement.style.display = "none";
+  volumeMasterElement.style.display = "none";
+
+}
 
 //for the function dmgDished(round)
 function spliceFromRound(round, enemy){

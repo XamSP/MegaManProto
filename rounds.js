@@ -5,12 +5,19 @@ const testRound = [new Mettaur()];
 
 const roundMettaur = [new Mettaur(), new Mettaur(), new Mettaur()];
 const roundFireBlade = [new CanDevil(), new Swordy()];
-const roundDoublePickWithCandle = [new CanDevil(), new Mettaur(), new Mettaur()];
+const roundDoublePickWithACandle = [new CanDevil(), new Mettaur(), new Mettaur()];
 const roundBossPharaohMan = [new PharaohMan()];
+const roundThreeSwordsmenOfTheNet = [new Swordy(), new Swordy(), new Swordy()];
+const roundTwoPicksAndAKnife = [new Mettaur(), new Mettaur(), new Swordy()];
 
+//Test set of rounds
+const testSetOfRounds = [testRound];
+const testBossRound = [roundBossPharaohMan];
 
 //Set of rounds
 const firstSetOfRounds = [testRound, roundFireBlade, roundBossPharaohMan];
-const testSetOfRounds = [testRound];
 
-const easySetOfRounds = [roundMettaur, roundDoublePickWithCandle, roundBossPharaohMan];
+const easySetOfRounds = [roundMettaur, roundDoublePickWithACandle, roundBossPharaohMan];
+const standardSetOfRounds = [roundMettaur, roundFireBlade, roundDoublePickWithACandle, roundTwoPicksAndAKnife, roundBossPharaohMan];
+const hardSetOfRounds = [];
+const undernetSetOfRounds = [];

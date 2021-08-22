@@ -19,14 +19,14 @@
 </head>
 
 <body style="margin: 0;">
-    <div id="mainMenuBG" class="">
-      <div id="mainMenu" class="">
+    <div id="mainMenuBG">
+      <div id="mainMenu">
         <button id="startGame" onclick="difficultyMenu()" style="font-family: MMBNThick;">Start Game</button>
         <button id="folderButton" onclick="folderMenu()" style="font-family: MMBNThick;">Folder</button>
         <button id="settingsButton" onclick="settingsMenu()" style="font-family: MMBNThick;">Settings</button>
       </div>
 
-      <div id="gameMenu" class="">
+      <div id="gameMenu">
         <!-- FIXME dificulty -->
         <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
         <button id="easyButton" onclick="startRounds(0)" style="font-family: MMBNThick;">Easy</button>
@@ -36,7 +36,7 @@
         <button id="undernetButton" onclick="startRounds(4)" style="font-family: MMBNThick;">???</button>
       </div>
 
-      <div id="chipFolderMenu" class="">
+      <div id="chipFolderMenu">
         <!-- FIXME chip customization -->
         <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
         <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
@@ -45,13 +45,39 @@
         <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
     </div>
 
-      <div id="settingsMenu" class="">
+      <div id="settingsMenu">
         <!-- FIXME Settings -->
-      <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
-      <button id="volumeButton" onclick="volume()" style="font-family: MMBNThick;">Volume</button>
-      <button id="disableMusicButton" onclick="disableMusic()" style="font-family: MMBNThick;">Disable Music</button>
-      <button id="creditsButton" onclick="credits()" style="font-family: MMBNThick;">Credits</button>
-      <button id="mobileButton" onclick="mobile()" style="font-family: MMBNThick;">Turn Mobile</button>
+        <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
+        <button id="volumeButton" onclick="volumeMaster()" style="font-family: MMBNThick;">Volume</button>
+        <button id="disableMusicButton" onclick="disableMusic()" style="font-family: MMBNThick;">Disable Music</button>
+        <button id="creditsButton" onclick="credits()" style="font-family: MMBNThick;">Credits</button>
+        <button id="mobileButton" onclick="mobile()" style="font-family: MMBNThick;">Turn Mobile</button>
+      </div>
+
+      <div id="volumeMaster">
+        <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
+        <div style="text-align: center;">
+          <label>Master Volume <br></label>
+          <input type="range" id="volume-control">
+        </div>
+      </div>
+
+      <div id="credits">
+        <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
+        <p>
+          This game is not affiliated with Capcom in any way. <br>
+          All non-original Mega Man Battle Network / Rockman EXE materials including but not limited to characters,
+          images, music, ideas and specific expressions thereof are (c) Capcom Co., Ltd. <br>
+          The usage of such materials in this game is transformative, for noncommercial purposes only, 
+          and will not have a significant effect upon the market for or value of the materials, 
+          and is thus exempted from liability under the Fair Use Doctrine.<br>
+          All other materials in the game are (c) of their original owners/creators.<br>
+          This game is distributed as is, with no express or implied warranties or guarantees.<br>
+          <br>
+          <br>
+          <br>
+          Coded by XamSP - GitHub: <a href="https://github.com/XamSP" target="_blank">https://github.com/XamSP</a>
+        </p>
       </div>
     </div>
 

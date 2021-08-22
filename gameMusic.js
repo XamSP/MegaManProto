@@ -19,8 +19,9 @@ function sound(src) {
   // }
 }
 
-const mainTheme = new sound("music/MMBN1 Theme Of Rockman Exe.mp3");
+
 //mainTheme.sound.volume = 0.5;
+const mainTheme = new sound("music/MMBN1 Theme Of Rockman Exe.mp3");
 
 const battleStart = new sound("music/goinbtl HQ.wav");
 
@@ -70,6 +71,22 @@ const hurt = new sound("music/Hurt HQ.wav");
 const deleted = new sound("music/Deleted HQ2.wav");
 
 const enemyDeleted = new sound("music/explode HQ.ogg");
+
+let allSounds = [enemyDeleted, deleted, hurt, targetSound, flameSFX, mettaurWave, 
+  winJingle, shielded, shieldDrawedSound, peilHPSound, pauseSound, recoverHPSound, 
+  attackInFullSynchro, invisNoise, chargedBuster, chargingBuster, virusBustingBGM, 
+  naviBattleBGM, dmgDishedSound, swordSwing, busterShot, battleStart, mainTheme, 
+  pauseSound, recoverHPSound, attackInFullSynchro, invisNoise, chargedBuster, 
+  chargingBuster, virusBustingBGM, naviBattleBGM, dmgDishedSound, swordSwing, 
+  busterShot, battleStart, mainTheme];
+
+let volume = document.querySelector("#volume-control");
+
+volume.addEventListener("change", function(e) {
+  for (let i in allSounds) {
+    allSounds[i].sound.volume = e.currentTarget.value / 100;
+  }
+})
 
 function backgroundMusic(setOfRounds, round) {
   var isPlaying = function (mySound) {

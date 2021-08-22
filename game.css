@@ -42,7 +42,7 @@
 
 #mainMenuBG {
  /* background-color: green;  */
-  background-image:url("images/background/menu.png");
+  background-image:url('images/background/menu.png');
   background-size: cover;
   width:100%;
   /* S  */
@@ -50,6 +50,7 @@
   z-index: 4;
   height: 100%; 
   background-repeat: no-repeat; 
+  /* filter: brightness(50%); */
   /* display: block;  */
   /* left: 20%;
   top: 20%;
@@ -76,7 +77,6 @@
 #restart {
   margin-top:30% ;
   margin-left:40% ;
-  /* margin-right:50% ; */
   height: 10% ;
   width: 20%;
   font-size: 1em;
@@ -85,71 +85,68 @@
 .backPageButton {
   margin-top:1% ;
   margin-left:1% ;
-  /* margin-right:10% ;  */
-  height: 10% ;
-  width: 20%;
-  font-size: 1em;
+  height: 5% ;
+  width: 10%;
+  font-size: 1.5em;
   display: block;
 }
 
-#startGame{
-  margin-top:25% ;
-  margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 10% ;
+
+#startGame, #folderButton, #settingsButton {
+  height: 5% ;
   width: 20%;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
-#folderButton, #settingsButton{
+#startGame {
+  margin-top:25% ;
+  margin-left:40% ;
+}
+
+#folderButton, #settingsButton {
   margin-top:2% ;
   margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 10% ;
+}
+
+#easyButton, #mediumButton, #hardButton, #undernetButton, #testButton {
+  height: 5% ;
   width: 20%;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 #easyButton{
-  margin-top:18%  ;
+  margin-top:20%  ;
   margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 7% ;
-  width: 20%;
-  font-size: 1em;
 }
 
-#mediumButton, #hardButton, #undernetButton, #testButton{
+#mediumButton, #hardButton, #undernetButton, #testButton {
   margin-top:1.5% ;
   margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 7% ;
-  width: 20%;
-  font-size: 1em;
 }
 
 #undernetButton { display: none; }
 
-#volumeButton{
-  margin-top:18% ;
-  margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 10% ;
+#volumeButton, #disableMusicButton, #creditsButton, #mobileButton {
+  height: 5% ;
   width: 20%;
-  font-size: 1em;
+  font-size: 1.5em;
+}
+#volumeButton{
+  margin-top:20% ;
+  margin-left:40% ;
 }
 
 #disableMusicButton, #creditsButton, #mobileButton{
   margin-top:1.5% ;
   margin-left:40% ;
-  /* margin-right:50% ; */
-  height: 10% ;
-  width: 20%;
-  font-size: 1em;
+}
+
+#credits, #volumeMaster {
+  display: none;
+  margin: 15%;
+  font-size: 1.5em;
 }
 
 #hp-bar {
-  /*margin-left: 100px; 
-  margin-top: 100px;*/
   background-color: darkgray;
 }
