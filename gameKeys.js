@@ -2,8 +2,10 @@
 document.onkeyup = function(e){
     var key = e.keyCode;
    
-    action(key);
-    currentTargetIcon.move(key);
+    if (gameStarted) {
+      action(key);
+      currentTargetIcon.move(key);  
+    }
 };
 
 function action(key) {

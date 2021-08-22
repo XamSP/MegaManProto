@@ -140,7 +140,11 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
 //Mettaur.prototype.enemyAttackTimeOut
 
 function enemyHpDisplay(enemy){
-  //lots of playing to show their hp right
+  //lots of playing to show their hp right 
+  
+  //here
+  if (currentRound <= 0) {return 0}
+
   if(enemy.hp >= 1 && enemy.width === 60) {
     ctx2.clearRect(enemy.x + (enemy.width / 4) -20, enemy.y + enemy.height + (enemy.height / 8) -20, enemy.width, enemy.height);
     ctx2.font = "30px MMBNThick";

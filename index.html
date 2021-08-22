@@ -8,7 +8,7 @@
   <link rel="shorcut icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
   <link rel="shorcut icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
   <style>
-    @font-face { font-family: MMBNThick; src: url('mmbnthick_regular.ttf'); font-size: 6.2em;} 
+    @font-face { font-family: MMBNThick; src: url('mmbnthick_regular.ttf');} 
   </style>
   <!-- src=".\images\favicon\favicon.ico" -->
   <!-- <link rel="icon" type="image/ico" href="favicon.ico">
@@ -18,16 +18,48 @@
   <title>MegaManJS</title>
 </head>
 
-<body>
-  
-    <div id="mainMenu" class="">
-      <button id="startGame" onclick="startGame()" style="font-family: MMBNThick;">Start Game</button>
+<body style="margin: 0;">
+    <div id="mainMenuBG" class="">
+      <div id="mainMenu" class="">
+        <button id="startGame" onclick="difficultyMenu()" style="font-family: MMBNThick;">Start Game</button>
+        <button id="folderButton" onclick="folderMenu()" style="font-family: MMBNThick;">Folder</button>
+        <button id="settingsButton" onclick="settingsMenu()" style="font-family: MMBNThick;">Settings</button>
+      </div>
+
+      <div id="gameMenu" class="">
+        <!-- FIXME dificulty -->
+        <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
+        <button id="easyButton" onclick="startRounds(0)" style="font-family: MMBNThick;">Easy</button>
+        <button id="mediumButton" onclick="startRounds(1)" style="font-family: MMBNThick;">Standard</button>
+        <button id="hardButton" onclick="startRounds(2)" style="font-family: MMBNThick;">Hard</button>
+        <button id="testButton" onclick="startRounds(3)" style="font-family: MMBNThick;">Test</button>
+        <button id="undernetButton" onclick="startRounds(4)" style="font-family: MMBNThick;">???</button>
+      </div>
+
+      <div id="chipFolderMenu" class="">
+        <!-- FIXME chip customization -->
+        <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
+        <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
+        <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
+        <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
+        <button id="" onclick="x()" style="font-family: MMBNThick;"> </button>
+    </div>
+
+      <div id="settingsMenu" class="">
+        <!-- FIXME Settings -->
+      <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
+      <button id="volumeButton" onclick="volume()" style="font-family: MMBNThick;">Volume</button>
+      <button id="disableMusicButton" onclick="disableMusic()" style="font-family: MMBNThick;">Disable Music</button>
+      <button id="creditsButton" onclick="credits()" style="font-family: MMBNThick;">Credits</button>
+      <button id="mobileButton" onclick="mobile()" style="font-family: MMBNThick;">Turn Mobile</button>
+      </div>
     </div>
 
     <div id="gameover">
       <button id="restart" onclick="refresh()">Restart?</button>
+      <button id="backToMenu" onclick="backToMenu()" style="font-family: MMBNThick;"></button>
     </div>
-    
+
     <div id="bg">
       <canvas  class="game-board" id="theCanvas" width="950" height="600">\</canvas>
       <canvas id="twoCanvas" width="950" height="600"></canvas>
@@ -35,11 +67,7 @@
       <canvas id="fourCanvas" width="950" height="600"></canvas>
       <canvas id="fiveCanvas" width="950" height="600"></canvas>
     </div>
-  <!-- <template id="x">
-    <div>
-      <div class="cardTemplate"></div>
-    </div>
-  </template> -->
+
   <script type="text/javascript" src="Megaman.js"></script>
   <script type="text/javascript" src="gameEnemies.js"></script>
   <script type="text/javascript" src="gameMisc.js"></script>

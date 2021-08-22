@@ -6,42 +6,12 @@
   height: 100%;
 } */
 
-
 #bg {
   margin: 0 auto;
+  margin-top: 2%;
   width: 70%;
   display: none;  
   /* padding: 0px 0px; */
-}
-
-@media screen and (orientation: portrait) {
-  img.winAnimation { max-width: 90%; }
-}
-
-@media screen and (orientation: landscape) {
-  img.winAnimation { max-height: 90%; }
-}
-
-img.winAnimation:empty
-{
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-
-img.winAnimation {
-  display: none;
-  position: absolute;
-  max-width: 80%;
-  top: 10%;
-  left: 10%;
-  /* border-radius: 3px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.9); */
-  z-index: 6;
 }
 
 .game-board {
@@ -50,55 +20,27 @@ img.winAnimation {
   /* padding: 0px 0px; */
   background-image: url('images/background/Internet.gif');
   background-size: contain;
-  
 }
 
-#theCanvas{
+#theCanvas, #twoCanvas, #threeCanvas, #fourCanvas, #fiveCanvas {
   margin: 0 auto;
   width: 70%;
   position: absolute;
   /* left: 0;
   top: 0; */
-  z-index: 0;
 }
 
-#twoCanvas{
-  margin:0 auto;
-  width: 70%;
-  position: absolute;
-  /* left: 0;
-  top: 0; */
-  z-index: 1;
-}
+#theCanvas   { z-index: 0; }
 
-#threeCanvas{
-  margin:0 auto;
-  width: 70%;
-  position: absolute;
-  /* left: 0;
-  top: 0; */
-  z-index: 2;
-}
+#twoCanvas   { z-index: 1; }
 
-#fourCanvas{
-  margin:0 auto;
-  width: 70%;
-  position: absolute;
-  /* left: 0;
-  top: 0; */
-  z-index: 3;
-}
+#threeCanvas { z-index: 2; }
 
-#fiveCanvas{
-  margin:0 auto;
-  width: 70%;
-  position: absolute;
-  /* left: 0;
-  top: 0; */
-  z-index: 4;
-}
+#fourCanvas  { z-index: 3; }
 
-#mainMenu {
+#fiveCanvas  { z-index: 4; }
+
+#mainMenuBG {
  /* background-color: green;  */
   background-image:url("images/background/menu.png");
   background-size: cover;
@@ -112,6 +54,15 @@ img.winAnimation {
   /* left: 20%;
   top: 20%;
   transform: translate(-20%, -20%); */
+}
+
+#mainMenu, #gameMenu, #settingsMenu {
+  width:100%;
+  /* S  */
+  position: absolute;
+  z-index: 3;
+  height: 100%; 
+  background-repeat: no-repeat; 
 }
 
 #gameover {
@@ -131,8 +82,65 @@ img.winAnimation {
   font-size: 1em;
 }
 
+.backPageButton {
+  margin-top:1% ;
+  margin-left:1% ;
+  /* margin-right:10% ;  */
+  height: 10% ;
+  width: 20%;
+  font-size: 1em;
+  display: block;
+}
+
 #startGame{
-  margin-top:30% ;
+  margin-top:25% ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 10% ;
+  width: 20%;
+  font-size: 1em;
+}
+
+#folderButton, #settingsButton{
+  margin-top:2% ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 10% ;
+  width: 20%;
+  font-size: 1em;
+}
+
+#easyButton{
+  margin-top:18%  ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 7% ;
+  width: 20%;
+  font-size: 1em;
+}
+
+#mediumButton, #hardButton, #undernetButton, #testButton{
+  margin-top:1.5% ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 7% ;
+  width: 20%;
+  font-size: 1em;
+}
+
+#undernetButton { display: none; }
+
+#volumeButton{
+  margin-top:18% ;
+  margin-left:40% ;
+  /* margin-right:50% ; */
+  height: 10% ;
+  width: 20%;
+  font-size: 1em;
+}
+
+#disableMusicButton, #creditsButton, #mobileButton{
+  margin-top:1.5% ;
   margin-left:40% ;
   /* margin-right:50% ; */
   height: 10% ;
@@ -145,4 +153,3 @@ img.winAnimation {
   margin-top: 100px;*/
   background-color: darkgray;
 }
-

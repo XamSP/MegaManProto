@@ -6,6 +6,8 @@ function draw(round) {
     round.map(x => x.animation());
     currentRound = round;
 
+    gameStarted = true;
+
     //Checking if Megaman is drawn/alive
     if(!currentMegaMan) {
       currentMegaMan = new Megaman();

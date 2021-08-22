@@ -61,7 +61,6 @@ function enemyNameDisplay(enemyArmy) {
   ctx.fillStyle = 'white';
 
   for (i = 0; i < enemyArmy.length; i++) {
-    console.log("h");
     //Maximum 10 characters
     ctx.fillText(enemyArmy[i].name, 820, (i + 1) * 30);
   }
