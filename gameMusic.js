@@ -14,9 +14,6 @@ function sound(src) {
       this.sound.pause();
       this.sound.isItPlaying = false;
   }
-  // this.increaseVol = function() {
-  //   this.sound.volume += 0.2;
-  // }
 }
 
 
@@ -49,7 +46,7 @@ const pauseSound = new sound("music/Pause HQ.wav");
 
 const newGameSound = new sound("music/NewGame HQ.wav");
 
-const peilHPSound = new sound("music/RedHP HQ.wav");
+const perilHPSound = new sound("music/RedHP HQ.wav");
 
 //trim
 const shieldDrawedSound = new sound("music/ShieldNCP HQ.wav");
@@ -72,21 +69,62 @@ const deleted = new sound("music/Deleted HQ2.wav");
 
 const enemyDeleted = new sound("music/explode HQ.ogg");
 
-let allSounds = [enemyDeleted, deleted, hurt, targetSound, flameSFX, mettaurWave, 
-  winJingle, shielded, shieldDrawedSound, peilHPSound, pauseSound, recoverHPSound, 
+let allSounds = [
+  enemyDeleted, deleted, hurt, targetSound, flameSFX, mettaurWave, 
+  winJingle, shielded, shieldDrawedSound, perilHPSound, pauseSound, recoverHPSound, 
   attackInFullSynchro, invisNoise, chargedBuster, chargingBuster, virusBustingBGM, 
-  naviBattleBGM, dmgDishedSound, swordSwing, busterShot, battleStart, mainTheme, 
-  pauseSound, recoverHPSound, attackInFullSynchro, invisNoise, chargedBuster, 
-  chargingBuster, virusBustingBGM, naviBattleBGM, dmgDishedSound, swordSwing, 
-  busterShot, battleStart, mainTheme];
+  naviBattleBGM, dmgDishedSound, swordSwing, busterShot, battleStart, mainTheme 
+];
 
-let volume = document.querySelector("#volume-control");
+let allTracks = [mainTheme, virusBustingBGM, naviBattleBGM];
 
-volume.addEventListener("change", function(e) {
+let allSoundEffects = [
+  enemyDeleted, deleted, hurt, targetSound, flameSFX, mettaurWave, 
+  winJingle, shielded, shieldDrawedSound, perilHPSound, pauseSound, 
+  recoverHPSound, attackInFullSynchro, invisNoise, chargedBuster, 
+  chargingBuster, dmgDishedSound, swordSwing, busterShot, battleStart
+];
+
+let masterVolume = document.querySelector("#master-volume-control");
+let musicVolume = document.querySelector("#music-volume-control");
+let soundEffectsVolume = document.querySelector("#sound-effects-volume-control");
+
+masterVolume.addEventListener("change", function(e) {
   for (let i in allSounds) {
     allSounds[i].sound.volume = e.currentTarget.value / 100;
   }
 })
+
+musicVolume.addEventListener("change", function(e) {
+  for (let i in allTracks) {
+    allTracks[i].sound.volume = e.currentTarget.value / 100;
+  }
+})
+
+soundEffectsVolume.addEventListener("change", function(e) {
+  for (let i in allSoundEffects) {
+    allSoundEffects[i].sound.volume = e.currentTarget.value / 100;
+  }
+})
+
+function disableMusic(event) {
+  //document.querySelector("disableMusicButton");
+  console.log(event.textContent)
+
+  if (event.textContent === "Disable Music") {
+    //console.log(typeof elementText)
+    event.textContent = "Enable Music";
+    for (let i in allTracks) { allTracks[i].sound.muted = true; }
+
+  } else {
+    event.textContent = "Disable Music";
+    for (let i in allTracks) { allTracks[i].sound.muted = false; }
+  }
+}  
+  
+allSounds.sound
+
+  console.log(event);
 
 function backgroundMusic(setOfRounds, round) {
   var isPlaying = function (mySound) {

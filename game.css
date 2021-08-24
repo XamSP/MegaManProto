@@ -91,6 +91,9 @@
   display: block;
 }
 
+.volumeDiv {
+  margin: 5%;
+}
 
 #startGame, #folderButton, #settingsButton {
   height: 5% ;

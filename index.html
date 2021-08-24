@@ -49,7 +49,7 @@
         <!-- FIXME Settings -->
         <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
         <button id="volumeButton" onclick="volumeMaster()" style="font-family: MMBNThick;">Volume</button>
-        <button id="disableMusicButton" onclick="disableMusic()" style="font-family: MMBNThick;">Disable Music</button>
+        <button id="disableMusicButton" onclick="disableMusic(this)" style="font-family: MMBNThick;">Disable Music</button>
         <button id="creditsButton" onclick="credits()" style="font-family: MMBNThick;">Credits</button>
         <button id="mobileButton" onclick="mobile()" style="font-family: MMBNThick;">Turn Mobile</button>
       </div>
@@ -57,10 +57,26 @@
       <div id="volumeMaster">
         <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
         <div style="text-align: center;">
-          <label>Master Volume <br></label>
-          <input type="range" id="volume-control">
+          <div class="volumeDiv">
+            <label>Master Volume <br></label>
+            <input type="range" id="master-volume-control" autocomplete="off">
+          </div>
+          
+          <div class="volumeDiv">
+            <label>Music Volume <br></label>
+            <input type="range" id="music-volume-control" autocomplete="off">
+          </div>
+
+          <div class="volumeDiv">
+            <label>Sound Effects Volume <br></label>
+            <input type="range" id="sound-effects-volume-control" autocomplete="off">
+          </div>
         </div>
       </div>
+
+      <!-- <div id="disableMusic">
+          
+      </div> -->
 
       <div id="credits">
         <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
