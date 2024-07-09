@@ -183,8 +183,6 @@ function swordyStillSwordFrames(swordy) {
 }
 
 function swordyAttackAnimation1(swordy) {
-    // console.log(intervalObject);
-    // console.log(swordy.intervalID);
     intervalObject.clear(swordy.intervalID);
     swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance1.png');
     setTimeout(()=>{swordy.drawEnemyRightOfMegaman('images/enemies/swordy/swordyStance2.png');},100);

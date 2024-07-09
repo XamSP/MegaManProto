@@ -20,9 +20,12 @@
 
 <body style="margin: 0;">
     <div id="mainMenuBG">
+
+      <img id="titleLogo" src="images/background/MMBNLogo2.png">
+
       <div id="mainMenu">
         <button id="startGame" onclick="difficultyMenu()" style="font-family: MMBNThick;">Start Game</button>
-        <button id="folderButton" onclick="folderMenu()" style="font-family: MMBNThick;">Folder</button>
+        <button id="folderButton" onclick="folderMenu()" style="visibility: hidden; font-family: MMBNThick;">Folder</button>
         <button id="settingsButton" onclick="settingsMenu()" style="font-family: MMBNThick;">Settings</button>
       </div>
 
@@ -31,9 +34,9 @@
         <button class="backPageButton" onclick="backPage(0)" style="font-family: MMBNThick;">Back</button>
         <button id="easyButton" onclick="startRounds(0)" style="font-family: MMBNThick;">Easy</button>
         <button id="mediumButton" onclick="startRounds(1)" style="font-family: MMBNThick;">Standard</button>
-        <button id="hardButton" onclick="startRounds(2)" style="font-family: MMBNThick;">Hard</button>
-        <button id="testButton" onclick="startRounds(3)" style="font-family: MMBNThick;">Test</button>
-        <button id="undernetButton" onclick="startRounds(4)" style="font-family: MMBNThick;">???</button>
+        <button id="hardButton" onclick="startRounds(2)" style="visibility: hidden; font-family: MMBNThick;">Hard</button>
+        <button id="testButton" onclick="startRounds(3)" style="visibility: hidden; font-family: MMBNThick;">Test</button>
+        <button id="undernetButton" onclick="startRounds(4)" style="visibility: hidden; font-family: MMBNThick;">???</button>
       </div>
 
       <div id="chipFolderMenu">
@@ -51,24 +54,24 @@
         <button id="volumeButton" onclick="volumeMaster()" style="font-family: MMBNThick;">Volume</button>
         <button id="disableMusicButton" onclick="disableMusic(this)" style="font-family: MMBNThick;">Disable Music</button>
         <button id="creditsButton" onclick="credits()" style="font-family: MMBNThick;">Credits</button>
-        <button id="mobileButton" onclick="mobile()" style="font-family: MMBNThick;">Turn Mobile</button>
+        <button id="mobileButton" onclick="mobile()" style="visibility: hidden; font-family: MMBNThick;">Turn Mobile</button>
       </div>
 
       <div id="volumeMaster">
         <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
         <div style="text-align: center;">
           <div class="volumeDiv">
-            <label>Master Volume <br></label>
+            <label style="color: white;">Master Volume <br></label>
             <input type="range" id="master-volume-control" autocomplete="off">
           </div>
           
           <div class="volumeDiv">
-            <label>Music Volume <br></label>
+            <label style="color: white;">Music Volume <br></label>
             <input type="range" id="music-volume-control" autocomplete="off">
           </div>
 
           <div class="volumeDiv">
-            <label>Sound Effects Volume <br></label>
+            <label style="color: white;">Sound Effects Volume <br></label>
             <input type="range" id="sound-effects-volume-control" autocomplete="off">
           </div>
         </div>
@@ -80,7 +83,7 @@
 
       <div id="credits">
         <button class="backPageButton" onclick="backPage(2)" style="font-family: MMBNThick;">Back</button>
-        <p>
+        <p style="font-family: MMBNThick; color: white; margin-left: 10%; margin-right: 10%;">
           This game is not affiliated with Capcom in any way. <br>
           All non-original Mega Man Battle Network / Rockman EXE materials including but not limited to characters,
           images, music, ideas and specific expressions thereof are (c) Capcom Co., Ltd. <br>
@@ -124,7 +127,5 @@
   <script type="text/javascript" src="gameEnemyAnimations.js"></script>
   <script type="text/javascript" src="gameMusic.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>

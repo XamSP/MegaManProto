@@ -108,11 +108,7 @@ soundEffectsVolume.addEventListener("change", function(e) {
 })
 
 function disableMusic(event) {
-  //document.querySelector("disableMusicButton");
-  console.log(event.textContent)
-
   if (event.textContent === "Disable Music") {
-    //console.log(typeof elementText)
     event.textContent = "Enable Music";
     for (let i in allTracks) { allTracks[i].sound.muted = true; }
 

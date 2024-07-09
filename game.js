@@ -34,6 +34,7 @@ var fiveCanvas = document.getElementById("fiveCanvas");
 var ctx5 = fourCanvas.getContext("2d");
 
 //HTML Menu Elements 
+let titleLogoElement = document.getElementById("titleLogo");
 let menuBGElement= document.getElementById("mainMenuBG");
 let menuElement = document.getElementById("mainMenu");
 let gameBoard = document.getElementById("bg"); 
@@ -124,13 +125,15 @@ function settingsMenu() {
 
 function volumeMaster() {
   blockAllElements();
-  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menu.png')";
+  titleLogoElement.style.filter = "brightness(0.3)";
+  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menubg.png')";
   volumeMasterElement.style.display = "block";
 }
 
 function credits(){
   blockAllElements();
-  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menu.png')";
+  titleLogoElement.style.filter = "brightness(0.3)";
+  menuBGElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url('images/background/menubg.png')";
   creditsElement.style.display = "block";
 }
 
@@ -145,7 +148,8 @@ function backPage(int) {
       break;
 
     case 2:
-      menuBGElement.style.backgroundImage = "url('images/background/menu.png')";
+      menuBGElement.style.backgroundImage = "url('images/background/menubg.png')";
+      titleLogoElement.style.filter = "brightness(1)";
 
     case 3:
       settingsMenu();
@@ -163,7 +167,9 @@ function backToMenu() {}
 function blockAllElements(blockBGImage = false) {
   if (blockBGImage) {
     menuBGElement.style.display = "none";
+    titleLogoElement.style.display = "none";
   }
+
 
   menuElement.style.display = "none";
   gameMenuElement.style.display = "none"; 

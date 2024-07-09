@@ -140,9 +140,7 @@ Enemy.prototype.enemyAttackTimeOut = function(context, interval){
 //Mettaur.prototype.enemyAttackTimeOut
 
 function enemyHpDisplay(enemy){
-  //lots of playing to show their hp right 
-  
-  //here
+
   if (currentRound <= 0) {return 0}
 
   if(enemy.hp >= 1 && enemy.width === 60) {
